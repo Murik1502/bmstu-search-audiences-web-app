@@ -2,6 +2,7 @@
 
 
 .custom-checkbox {
+    justify-content: center;
     font-family: "ALS Sector Regular Regular";
     margin-top: 7vh;
     display: flex;
