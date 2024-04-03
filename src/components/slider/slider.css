@@ -1,0 +1,71 @@
+@import url(https://db.onlinewebfonts.com/c/595030bb520f1e2ab2fb4e8d7c5f30a5?family=ALS+Sector+Regular+Regular);
+
+
+.custom-checkbox {
+    font-family: "ALS Sector Regular Regular";
+    margin-top: 7vh;
+    display: flex;
+    width: 292px;
+    height: 42px;
+    border-radius: 54px;
+    input#status {
+        display: none;
+
+        + label {
+            height: 100%;
+            width: 100%;
+            > .status-switch {
+                cursor: pointer;
+                width: 100%;
+                height: 100%;
+                position: relative;
+                background: #303030;
+                border: 1px solid #CCCCCC;
+                color: #fff;
+                transition: all 0.5s ease;
+                border-radius: 54px;
+
+                &:before,
+                &:after {
+                    border-radius: 54px;
+                    height: 100%;
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    position: absolute;
+                    justify-content: center;
+                    transition: all 0.5s ease;
+                }
+
+                &:before {
+                    background-color: #006CDC;
+                    color: white;
+                    box-shadow: 0 0 4px 4px rgba(0,0,0, 0.2);
+                    left: 0px;
+                    content: attr(data-unchecked);
+                    z-index: 10;
+                }
+
+                &:after {
+                    right: 0;
+                    content: attr(data-checked);
+                }
+            }
+        }
+
+        &:checked + label > .status-switch {
+            background-color: #303030;
+
+            &:after {
+                left: 0;
+                content: attr(data-unchecked);
+            }
+
+            &:before {
+                color: white;
+                left: 50%;
+                content: attr(data-checked);
+            }
+        }
+    }
+}
