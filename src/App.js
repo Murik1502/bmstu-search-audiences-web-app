@@ -1,5 +1,4 @@
 import './App.css';
-import Slider from "./components/slider/slider";
 //import {useTelegram} from "./hooks/useTelegram";
 
 
