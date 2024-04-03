@@ -1,10 +1,10 @@
 import './App.css';
-import {useTelegram} from "./hooks/useTelegram";
+//import {useTelegram} from "./hooks/useTelegram";
 
 
 
 function App() {
-    const {toggleMainButton, toggleBackButton} = useTelegram();
+   // const {toggleMainButton, toggleBackButton} = useTelegram();
 
 
     return (
