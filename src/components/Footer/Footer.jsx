@@ -1,6 +1,7 @@
 import React from 'react';
 import {useTelegram} from "../../hooks/useTelegram";
 import "./Footer.css"
+
 const FSGNLink = "https://t.me/bmstu_fsgn"
 
 
