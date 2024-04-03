@@ -7,8 +7,8 @@
     width: 100%;
     height: 30px;
     display: flex;
-    background: var(--tg-theme-bg-color);
-    color: var(--tg-theme-color);
+    background: #303030;
+    color: #fff;
     align-items: center;
     justify-content: space-between;
     padding: 0 10px;

@@ -9,9 +9,9 @@ function App() {
 
     return (
         <div className="App">
-            text-color
-            <button onClick={toggleMainButton}>toggle MainButton</button>
-            <button onClick={toggleBackButton}>toggle BackButton</button>
+            <h1 className={"header"}>Найти свободную аудиторию</h1>
+            {/*<button onClick={toggleMainButton}>toggle MainButton</button>*/}
+            {/*<button onClick={toggleBackButton}>toggle BackButton</button>*/}
         </div>
     );
 }
