@@ -11,7 +11,8 @@ const Footer = () => {
     return (
         <div className={"footer"}>
             <p className={"footer__desc"}>© 2024 МГТУ им. Н.Э. Баумана</p>
-            <a className={"footer__link"} href="#" onClick={() => tg.openTelegramLink(FSGNLink)}>Created by SGN</a>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a className={"footer__link"} onClick={() => tg.openTelegramLink(FSGNLink)}>Created by SGN</a>
         </div>
     );
 };
