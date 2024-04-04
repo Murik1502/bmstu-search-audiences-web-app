@@ -11,9 +11,7 @@
     appearance: none;
     border-radius: 54px;
     padding-left: 20px;
-    padding-top: 2px;
-    line-height: 1.1;
-    padding-right: 32px;/* Добавлено место для стрелки */
+    line-height: 1.1; /* Добавлено место для стрелки */
     font-size: 16px;
     cursor: pointer;
     color: #fff;
