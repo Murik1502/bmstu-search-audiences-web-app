@@ -14,7 +14,7 @@ function Index() {
     }, [weekDay, setWeekDay]);
 
     if (weekDay.day !== "") {
-        tg.MainButton.text("Поиск")
+        //tg.MainButton.text("Найти")
         toggleMainButton()
     }
 
