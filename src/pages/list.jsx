@@ -1,20 +1,20 @@
 import React from 'react';
 import {useTelegram} from "../hooks/useTelegram";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const List = () => {
-
+    const navigate = useNavigate();
     const {toggleBackButton, tg} = useTelegram();
 
     const onBackButtonClick = () => {
         toggleBackButton();
-        return <Navigate to="/"/>;
+        navigate('/');
     }
 
-    if (!tg.BackButton.isVisible)
+    if (!tg.BackButton.isVisible) {
         toggleBackButton();
-    tg.BackButton.onClick(onBackButtonClick)
-
+        tg.BackButton.onClick(onBackButtonClick)
+    }
     return (
         <div>
             

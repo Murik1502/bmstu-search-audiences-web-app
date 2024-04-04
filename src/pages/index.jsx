@@ -1,29 +1,35 @@
 import React, {useEffect, useState} from 'react';
 import WeekDaySelector from "../components/WeekDaySelector";
 import {useTelegram} from "../hooks/useTelegram";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 
 
 function Index() {
-
-    const onMainButtonClick = () => {
-        tg.MainButton.hide();
-        return <Navigate to="/list"/>;
-    }
+    
+    const navigate = useNavigate();
 
     const [weekDay, setWeekDay] = useState({week: "numerator", day: ""})
     const {tg} = useTelegram();
+
+
+    const onMainButtonClick = () => {
+        tg.MainButton.hide();
+        navigate('/list');
+    }
+    
     useEffect(() => {
         console.log(weekDay)
-    }, [weekDay, setWeekDay]);
+        if (weekDay.day !== "") {
+            tg.MainButton.setText("Найти")
+            tg.MainButton.show()
+            tg.MainButton.onClick(onMainButtonClick);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [weekDay, navigate, tg]);
 
-    if (weekDay.day !== "") {
-        tg.MainButton.setText("Найти")
-        tg.MainButton.show()
-        tg.MainButton.onClick(onMainButtonClick);
-    }
+    
 
     return (
         <div className={"wrap"}>
