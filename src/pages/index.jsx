@@ -3,9 +3,6 @@ import WeekDaySelector from "../components/WeekDaySelector";
 import {useTelegram} from "../hooks/useTelegram";
 import {useNavigate} from "react-router-dom";
 
-
-
-
 function Index() {
     
     const navigate = useNavigate();
