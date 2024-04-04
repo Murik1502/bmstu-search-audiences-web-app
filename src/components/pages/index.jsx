@@ -1,6 +1,5 @@
 import React from 'react';
 import Slider from "../slider/slider";
-import Footer from "../Footer/Footer";
 
 const Index = () => {
     return (
