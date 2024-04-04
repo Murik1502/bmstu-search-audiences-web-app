@@ -23,7 +23,7 @@ const List = () => {
     const weekDayData = location.state.data
     console.log("week day", weekDayData);
 
-    fetch(`http://localhost:3333/get?week=${weekDayData.week}&day=${weekDayData.day}`)
+    fetch(`http://localhost:3333/data?week=${weekDayData.week}&day=${weekDayData.day}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
