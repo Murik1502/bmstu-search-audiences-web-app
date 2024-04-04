@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import WeekDaySelector from "../components/WeekDaySelector";
+import {useTelegram} from "../hooks/useTelegram";
 
 
 
@@ -7,10 +8,15 @@ import WeekDaySelector from "../components/WeekDaySelector";
 function Index() {
 
     const [weekDay, setWeekDay] = useState({week: "numerator", day: ""})
-
+    const {toggleMainButton, tg} = useTelegram();
     useEffect(() => {
         console.log(weekDay)
     }, [weekDay, setWeekDay]);
+
+    if (weekDay.day !== "") {
+        tg.MainButton.text("Поиск")
+        toggleMainButton()
+    }
 
     return (
         <div className={"wrap"}>
