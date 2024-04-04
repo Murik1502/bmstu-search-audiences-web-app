@@ -7,13 +7,14 @@ const List = () => {
     const {toggleBackButton, tg} = useTelegram();
 
     const onBackButtonClick = () => {
+        tg.BackButton.offClick(onBackButtonClick);
         toggleBackButton();
         navigate('/');
     }
 
     if (!tg.BackButton.isVisible) {
         toggleBackButton();
-        tg.BackButton.onClick(onBackButtonClick)
+        tg.BackButton.onClick(onBackButtonClick);
     }
     return (
         <div>
