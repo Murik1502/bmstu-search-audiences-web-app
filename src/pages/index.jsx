@@ -22,7 +22,7 @@ function Index() {
     if (weekDay.day !== "") {
         tg.MainButton.setText("Найти")
         tg.MainButton.show()
-        tg.MainButton.onClick(() => onMainButtonClick);
+        tg.MainButton.onClick(onMainButtonClick);
     }
 
     return (

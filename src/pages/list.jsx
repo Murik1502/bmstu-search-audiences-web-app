@@ -13,7 +13,7 @@ const List = () => {
 
     if (!tg.BackButton.isVisible)
         toggleBackButton();
-    tg.BackButton.onClick(() => onBackButtonClick)
+    tg.BackButton.onClick(onBackButtonClick)
 
     return (
         <div>
