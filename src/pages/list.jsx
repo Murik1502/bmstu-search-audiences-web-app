@@ -18,11 +18,11 @@ const List = () => {
     }
 
     const weekDayData = {
-        "week": tg.CloudStorage.getItem("week")[1],
-        "day" : tg.CloudStorage.getItem("day")[1]
+        "week": tg.CloudStorage.getItem("week"),
+        "day" : tg.CloudStorage.getItem("day")
     }
-
     console.log(weekDayData);
+    console.log(tg.CloudStorage.getItem());
 
     return (
 
