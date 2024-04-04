@@ -2,8 +2,8 @@ import './App.css';
 import React, {useEffect} from "react";
 import {useTelegram} from "./hooks/useTelegram";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Index from "./components/pages";
-import List from "./components/pages/list";
+import Index from "./pages";
+import List from "./pages/list";
 
 
 

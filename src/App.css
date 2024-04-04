@@ -24,3 +24,16 @@ body {
 .header {
   margin-top: 15vh;
 }
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.weekDaySelector {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
