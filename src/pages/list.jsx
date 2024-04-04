@@ -16,9 +16,18 @@ const List = () => {
         toggleBackButton();
         tg.BackButton.onClick(onBackButtonClick);
     }
+
+    const weekDayData = {
+        "week": tg.CloudStorage.getItem("week")[1],
+        "day" : tg.CloudStorage.getItem("day")[1]
+    }
+
+    console.log(weekDayData);
+
     return (
+
         <div>
-            
+
         </div>
     );
 };

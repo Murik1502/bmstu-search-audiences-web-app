@@ -16,6 +16,8 @@ function Index() {
 
     const onMainButtonClick = () => {
         tg.MainButton.hide();
+        tg.CloudStorage.setItem("week", weekDay.week);
+        tg.CloudStorage.setItem("day", weekDay.day);
         navigate('/list');
     }
     
