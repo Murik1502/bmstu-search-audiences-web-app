@@ -5,15 +5,15 @@ const MySelect = ({options, defaultValue, value, onChange}) => {
         <select
             className={"mySelect"}
             value={value}
-            onChange={event => onChange(event.target.value)}
-        >
-            <option disabled selected value="">{defaultValue}</option>
+            onChange={event => onChange(event.target.value)}>
+            <option className={"mySelect__default"} disabled selected value="">{defaultValue}</option>
             {options.map(option =>
-                <option key={option.value} value={option.value}>
+                <option key={option.value} value={option.value} className={option.value}>
                     {option.name}
                 </option>
             )}
         </select>
+
     );
 };
 

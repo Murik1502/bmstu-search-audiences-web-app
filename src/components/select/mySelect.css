@@ -1,3 +1,51 @@
 .mySelect {
+    justify-content: center;
     margin-top: 5vh;
+    font-family: "ALS Sector Regular Regular";
+    display: flex;
+    width: 250px;
+    align-items: center;
+    background: #303030;
+    overflow: hidden;
+    border: 1px solid #CCCCCC;
+    appearance: none;
+    border-radius: 54px;
+    padding-left: 20px;
+    padding-top: 2px;
+    line-height: 1.1;
+    padding-right: 32px;/* Добавлено место для стрелки */
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+    height: 42px;
+}
+
+.custom-select {
+    position: relative;
+    width: fit-content;
+}
+
+.mySelect {
+
+}
+
+.mySelect:focus {
+    outline: none;
+}
+
+.select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 8px; /* Правильное положение стрелки */
+    transform: translateY(-50%);
+}
+
+.select-arrow svg {
+    width: 16px;
+    height: 16px;
+    fill: #333;
+}
+
+.mySelect__default {
+    color: #999; /* Цвет текста для пустого значения */
 }

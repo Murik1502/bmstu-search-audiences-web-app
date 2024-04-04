@@ -2,7 +2,7 @@ import React from 'react';
 import {useTelegram} from "../hooks/useTelegram";
 import {useLocation, useNavigate} from "react-router-dom";
 
-const List = () => {
+function List () {
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -40,11 +40,10 @@ const List = () => {
 
 
     return (
-
         <div>
 
         </div>
     );
-};
+}
 
 export default List;

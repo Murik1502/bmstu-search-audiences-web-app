@@ -6,8 +6,11 @@
     font-family: "ALS Sector Regular Regular";
     margin-top: 7vh;
     display: flex;
-    width: 292px;
+    width: 250px;
     height: 42px;
+    line-height: 1.1;
+    align-items: center;
+
     border-radius: 54px;
     input#status {
         display: none;
@@ -42,7 +45,7 @@
                     background-color: #006CDC;
                     color: white;
                     box-shadow: 0 0 4px 4px rgba(0,0,0, 0.2);
-                    left: 0px;
+                    left: 0;
                     content: attr(data-unchecked);
                     z-index: 10;
                 }
