@@ -1,21 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import WeekDaySelector from "../components/WeekDaySelector";
 import {useTelegram} from "../hooks/useTelegram";
-
+import {useHistory} from 'react-router-dom';
 
 
 
 function Index() {
 
+    const router = useHistory()
+
     const [weekDay, setWeekDay] = useState({week: "numerator", day: ""})
-    const {toggleMainButton, tg} = useTelegram();
+    const {tg} = useTelegram();
     useEffect(() => {
         console.log(weekDay)
     }, [weekDay, setWeekDay]);
 
     if (weekDay.day !== "") {
         tg.MainButton.setText("Найти")
-        toggleMainButton()
+        tg.MainButton.show()
+        tg.MainButton.onClick(() => router.push('/list'))
     }
 
     return (
