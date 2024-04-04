@@ -1,19 +1,26 @@
 import './App.css';
-//import {useTelegram} from "./hooks/useTelegram";
+import React, {useEffect} from "react";
+import {useTelegram} from "./hooks/useTelegram";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Index from "./components/pages";
+import List from "./components/pages/list";
 
 
 
 function App() {
-   // const {toggleMainButton, toggleBackButton} = useTelegram();
+   const {tg} = useTelegram();
 
+    useEffect(() => {
+        tg.ready();
+    }, [tg]);
 
     return (
-        <div className="App">
-            <h1 className={"header"}>Найти свободную аудиторию</h1>
-
-            {/*<button onClick={toggleMainButton}>toggle MainButton</button>*/}
-            {/*<button onClick={toggleBackButton}>toggle BackButton</button>*/}
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route index element={<Index/>}/>
+                <Route path={"list"} element={<List/>}/>
+            </Routes>
+        </BrowserRouter>
     );
 }
 

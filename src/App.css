@@ -21,12 +21,6 @@ body {
   justify-content: center;
 }
 
-#root {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
 .header {
   margin-top: 15vh;
 }

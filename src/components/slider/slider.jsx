@@ -5,7 +5,7 @@ const Slider = () => {
     return (
             <div className="custom-checkbox">
                 <input id="status" type="checkbox" name="status"/>
-                    <label for="status">
+                    <label htmlFor="status">
                         <div className="status-switch" data-unchecked="Числитель"  data-checked="Знаменатель"/>
                     </label>
             </div>
