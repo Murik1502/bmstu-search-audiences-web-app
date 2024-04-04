@@ -1,8 +1,11 @@
 import React from 'react';
 import {useTelegram} from "../hooks/useTelegram";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const List = () => {
+
+    const location = useLocation();
+
     const navigate = useNavigate();
     const {toggleBackButton, tg} = useTelegram();
 
@@ -17,12 +20,9 @@ const List = () => {
         tg.BackButton.onClick(onBackButtonClick);
     }
 
-    const weekDayData = {
-        "week": tg.CloudStorage.getItem("week"),
-        "day" : tg.CloudStorage.getItem("day")
-    }
+    const weekDayData = location.state.data
+
     console.log("week day", weekDayData);
-    console.log("cloud storage Keys", tg.CloudStorage.getKeys());
 
     return (
 
