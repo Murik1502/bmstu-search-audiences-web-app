@@ -9,6 +9,7 @@ function Index() {
 
     const [weekDay, setWeekDay] = useState({week: "numerator", day: ""})
     const {tg} = useTelegram();
+    tg.expand();
 
 
     const onMainButtonClick = () => {
