@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import "./mydropdown.css";
 
-const MyDropdown = ({ defaultValue, initialOptions }) => {
-    const [options, setOptions] = useState(initialOptions);
+const MyDropdown = ({ defaultValue, options, setOptions, originalOrder}) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectAllChecked, setSelectAllChecked] = useState(false);
-    const [originalOrder, setOriginalOrder] = useState(initialOptions.map(option => option.value));
+    const dropdownRef = useRef(null);
+
 
     useEffect(() => {
-        setOptions(initialOptions);
-        setOriginalOrder(initialOptions.map(option => option.value));
-    }, [initialOptions]);
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setIsDropdownOpen(false);
+        }
     };
 
     const toggleSelectAll = () => {
@@ -38,11 +46,14 @@ const MyDropdown = ({ defaultValue, initialOptions }) => {
         const nonSelectedOptions = updatedOptions.filter(option => !option.checked);
 
         const selectedOrder = originalOrder.filter(value => selectedOptions.some(option => option.value === value));
+        const nonSelectedOrder = originalOrder.filter(value => selectedOptions.some(option => option.value === value));
+
         setOptions([...selectedOptions.sort((a, b) => selectedOrder.indexOf(a.value) - selectedOrder.indexOf(b.value)), ...nonSelectedOptions]);
     };
 
+
     return (
-        <div className="dropdown" id="dropdown">
+        <div className="dropdown" id="dropdown" ref={dropdownRef}>
             <div onClick={toggleDropdown} className="dropdown-text">
                 <span>{defaultValue}</span>
                 <span>{isDropdownOpen ? '▼' : '▲'}</span>
@@ -60,7 +71,7 @@ const MyDropdown = ({ defaultValue, initialOptions }) => {
                                     checked={option.checked}
                                     onChange={() => handleChange(option.value, !option.checked)}
                                 />
-                                {option.label}
+                                <p className="option-text">{option.label}</p>
                             </label>
                         </React.Fragment>
                     ))}
