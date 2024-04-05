@@ -1,6 +1,7 @@
 import React from 'react';
 import {useTelegram} from "../hooks/useTelegram";
 import {useLocation, useNavigate} from "react-router-dom";
+import FloorTimeSelector from "../components/FloorTimeSelector";
 
 function List () {
 
@@ -23,25 +24,10 @@ function List () {
     const weekDayData = location.state.data
     console.log("week day", weekDayData);
 
-    fetch(`http://localhost:3333/data?week=${weekDayData.week}&day=${weekDayData.day}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Response data:', data);
-            // Ваш код для обработки полученных данных
-        })
-        .catch(error => {
-            console.error('There was a problem with your fetch operation:', error);
-        });
-
 
     return (
         <div>
-
+            <FloorTimeSelector/>
         </div>
     );
 }

@@ -37,3 +37,10 @@ body {
   flex-direction: column;
 }
 
+.dropdown-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 10vh;
+}
+
