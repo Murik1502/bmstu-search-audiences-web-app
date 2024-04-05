@@ -38,9 +38,10 @@ body {
 }
 
 .dropdown-wrapper {
+  gap: 3vh;
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 10vh;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
 }
 

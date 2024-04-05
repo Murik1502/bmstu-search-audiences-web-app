@@ -1,0 +1,17 @@
+.item-header {
+    font-family: "ALS Sector Regular Regular";
+    justify-content: center;
+    margin-top: 10vh;
+    text-align: center;
+    font-size: 25px;
+}
+
+.items-wrapper {
+    margin-top: 5vh;
+    gap: 3vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 10vh;
+
+}

@@ -24,7 +24,6 @@
 }
 
 .dropdown-content {
-    font-size: 13px;
     width: 150px;
     padding: 0 5px 0 5px;
     position: absolute;
@@ -38,17 +37,25 @@
 }
 
 .dropdown-content div {
+    font-family: "ALS Sector Regular Regular";
     padding: 3px;
 }
 
 .dropdown-content input[type="checkbox"] {
+    font-family: "ALS Sector Regular Regular";
     margin-right: 5px;
 }
 
 .dropdown .dropdown-content label.option {
-    display: block;
+    display: flex;
     padding: 3px;
     cursor: pointer;
+}
+
+.option-text {
+    font-family: "ALS Sector Regular Regular";
+    align-self: center;
+    height: 16px;
 }
 
 
