@@ -67,6 +67,8 @@ function List () {
     // eslint-disable-next-line no-unused-vars
     const [fetchAudiences, isPostLoading, postError] = useFetching(
         async () => {
+            //const response = await PostService.getAll("numerator", "monday");
+
             const response = await PostService.getAll(weekDayData.week, weekDayData.day);
             setAudiences(transformData(response.data))
             console.log(audiences)
