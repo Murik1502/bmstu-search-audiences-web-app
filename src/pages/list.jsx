@@ -67,7 +67,7 @@ function List () {
     // eslint-disable-next-line no-unused-vars
     const [fetchAudiences, isPostLoading, postError] = useFetching(
         async () => {
-            const response = await PostService.getAll("numerator", "friday");
+            const response = await PostService.getAll(weekDayData.week, weekDayData.day);
             setAudiences(transformData(response.data))
             console.log(audiences)
         }
@@ -75,7 +75,8 @@ function List () {
     useEffect(() => {
         fetchAudiences()
         console.log("FETCHING")
-    }, [fetchAudiences]);
+        // eslint-disable-next-line
+    }, []);
 
 
     const [originalLevelOrder, setOriginalLevelOrder] = useState(levels.map(option => option.value));
