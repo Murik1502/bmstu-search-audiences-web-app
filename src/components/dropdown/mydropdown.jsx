@@ -46,7 +46,7 @@ const MyDropdown = ({ defaultValue, options, setOptions, originalOrder}) => {
         const nonSelectedOptions = updatedOptions.filter(option => !option.checked);
 
         const selectedOrder = originalOrder.filter(value => selectedOptions.some(option => option.value === value));
-        const nonSelectedOrder = originalOrder.filter(value => selectedOptions.some(option => option.value === value));
+        //const nonSelectedOrder = originalOrder.filter(value => selectedOptions.some(option => option.value === value));
 
         setOptions([...selectedOptions.sort((a, b) => selectedOrder.indexOf(a.value) - selectedOrder.indexOf(b.value)), ...nonSelectedOptions]);
     };
