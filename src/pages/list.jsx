@@ -58,12 +58,13 @@ function List () {
         tg.BackButton.onClick(onBackButtonClick);
     }
 
-    //const weekDayData = location.state.data
-    //console.log("week day", weekDayData);
+    const weekDayData = location.state.data
+    console.log("week day", weekDayData);
 
     const [audiences, setAudiences] = useState([])
     const [sortedAudiences, setSortedAudiences] = useState(audiences)
 
+    // eslint-disable-next-line no-unused-vars
     const [fetchAudiences, isPostLoading, postError] = useFetching(
         async () => {
             const response = await PostService.getAll("numerator", "friday");
@@ -74,7 +75,7 @@ function List () {
     useEffect(() => {
         fetchAudiences()
         console.log("FETCHING")
-    }, []);
+    }, [fetchAudiences]);
 
 
     const [originalLevelOrder, setOriginalLevelOrder] = useState(levels.map(option => option.value));
@@ -101,10 +102,9 @@ function List () {
     const filterAudiences = (audiences, levelOptions, timeOptions) => {
         const selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
         const selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
-        const filteredAudiences = audiences.filter(audience => {
+        return audiences.filter(audience => {
             return selectedLevels.includes(audience[0]) && selectedTimes.includes(audience[2]);
         });
-        return filteredAudiences;
     };
 
     return (
