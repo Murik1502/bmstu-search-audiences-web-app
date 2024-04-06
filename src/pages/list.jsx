@@ -79,23 +79,16 @@ function List () {
         console.log("FETCHING")
         // eslint-disable-next-line
     }, []);
-
-
-    const [originalLevelOrder, setOriginalLevelOrder] = useState(levels.map(option => option.value));
     const [levelOptions, setLevelOptions] = useState(levels);
-    
-    const [originalTimeOrder, setOriginalTimeOrder] = useState(levels.map(option => option.value));
     const [timeOptions, setTimeOptions] = useState(times);
 
 
     useEffect(() => {
         setLevelOptions(levelOptions);
-        setOriginalLevelOrder(levelOptions.map(option => option.value));
     }, [levelOptions]);
 
     useEffect(() => {
         setTimeOptions(timeOptions);
-        setOriginalTimeOrder(timeOptions.map(option => option.value));
     }, [timeOptions]);
     
     useEffect(() => {
@@ -114,9 +107,9 @@ function List () {
         <div>
             <div className="dropdown-wrapper">
                 <Mydropdown defaultValue="Этаж" options={levelOptions} setOptions={setLevelOptions}
-                            originalOrder={originalLevelOrder}/>
+                            />
                 <Mydropdown defaultValue="Время" options={timeOptions} setOptions={setTimeOptions}
-                            originalOrder={originalTimeOrder}/>
+                            />
             </div>
             <MyList items={sortedAudiences}/>
         </div>

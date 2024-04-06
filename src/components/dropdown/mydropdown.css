@@ -68,11 +68,6 @@
     background-color: #007bff; /* Новый цвет фона чекбокса при активации */
 }
 
-.dropdown-content hr {
-    border: none;
-    border-top: 1px solid #ccc;
-}
-
 .dropdown .dropdown-content {
     display: block;
 }
