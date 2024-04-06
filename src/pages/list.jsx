@@ -73,11 +73,11 @@ function List () {
             console.log(audiences)
         }
     )
+
     useEffect(() => {
         fetchAudiences()
         console.log("FETCHING")
-        // eslint-disable-next-line
-    }, []);
+    });
     const [levelOptions, setLevelOptions] = useState(levels);
     const [timeOptions, setTimeOptions] = useState(times);
 
@@ -92,6 +92,7 @@ function List () {
     
     useEffect(() => {
         setSortedAudiences(filterAudiences(audiences, levelOptions, timeOptions))
+        // eslint-disable-next-line
     }, [audiences, levelOptions, timeOptions])
 
     var selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
