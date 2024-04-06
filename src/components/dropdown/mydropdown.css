@@ -19,7 +19,7 @@
     width: 130px;
     height: 42px;
     font-family: "ALS Sector Regular Regular";
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.1;
 }
 
@@ -37,7 +37,6 @@
 }
 
 .dropdown-content div {
-    font-family: "ALS Sector Regular Regular";
     padding: 3px;
 }
 
@@ -52,12 +51,16 @@
     cursor: pointer;
 }
 
-.option-text {
-    font-family: "ALS Sector Regular Regular";
-    align-self: center;
-    height: 16px;
+.option {
+    display: flex; /* Use flexbox layout */
+    align-items: center;
 }
 
+.option-text {
+    font-family: "ALS Sector Regular Regular";
+    font-size: 15px;
+    line-height: 1.1;
+}
 
 .dropdown .dropdown-content input[type="checkbox"] + label:hover::before {
     background-color: #f0f0f0; /* Новый цвет фона чекбокса при наведении */

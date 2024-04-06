@@ -68,7 +68,6 @@ function List () {
     const [fetchAudiences, isPostLoading, postError] = useFetching(
         async () => {
             //const response = await PostService.getAll("numerator", "monday");
-
             const response = await PostService.getAll(weekDayData.week, weekDayData.day);
             setAudiences(transformData(response.data))
             console.log(audiences)
@@ -95,9 +94,12 @@ function List () {
         setSortedAudiences(filterAudiences(audiences, levelOptions, timeOptions))
     }, [audiences, levelOptions, timeOptions])
 
+    var selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
+    var selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
+
     const filterAudiences = (audiences, levelOptions, timeOptions) => {
-        const selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
-        const selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
+        selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
+        selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
         return audiences.filter(audience => {
             return selectedLevels.includes(audience[0]) && selectedTimes.includes(audience[2]);
         });
@@ -111,7 +113,13 @@ function List () {
                 <Mydropdown defaultValue="Время" options={timeOptions} setOptions={setTimeOptions}
                             />
             </div>
-            <MyList items={sortedAudiences}/>
+            {   sortedAudiences.length ?
+                <MyList items={sortedAudiences}/> :
+                (selectedLevels.length && selectedTimes.length ?
+                    <h1 className={"item-header"}>Нет Аудиторий!</h1> :
+                    <h1 className={"item-header"}>Выберите время и этаж!</h1>)
+            }
+
         </div>
     );
 }
