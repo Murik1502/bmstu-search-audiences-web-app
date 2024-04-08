@@ -58,6 +58,12 @@ function List () {
         tg.BackButton.onClick(onBackButtonClick);
     }
 
+    useEffect(() => {
+        fetchAudiences()
+        console.log("FETCHING")
+        // eslint-disable-next-line
+    }, []);
+
     const weekDayData = location.state.data
     console.log("week day", weekDayData);
 
@@ -69,15 +75,17 @@ function List () {
         async () => {
             //const response = await PostService.getAll("numerator", "monday");
             const response = await PostService.getAll(weekDayData.week, weekDayData.day);
-            setAudiences(transformData(response.data))
+            setAudiences(prevAudiences => transformData(response.data));
             console.log(audiences)
         }
     )
 
+
     useEffect(() => {
         fetchAudiences()
         console.log("FETCHING")
-    });
+    }, []);
+
     const [levelOptions, setLevelOptions] = useState(levels);
     const [timeOptions, setTimeOptions] = useState(times);
 
