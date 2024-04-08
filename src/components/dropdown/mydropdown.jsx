@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import "./mydropdown.css";
 
-const MyDropdown = ({ defaultValue, options, setOptions, originalOrder}) => {
+const MyDropdown = ({ defaultValue, options, setOptions}) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectAllChecked, setSelectAllChecked] = useState(false);
     const dropdownRef = useRef(null);
@@ -41,14 +41,6 @@ const MyDropdown = ({ defaultValue, options, setOptions, originalOrder}) => {
             return option;
         });
         setOptions(updatedOptions);
-
-        const selectedOptions = updatedOptions.filter(option => option.checked);
-        const nonSelectedOptions = updatedOptions.filter(option => !option.checked);
-
-        const selectedOrder = originalOrder.filter(value => selectedOptions.some(option => option.value === value));
-        //const nonSelectedOrder = originalOrder.filter(value => selectedOptions.some(option => option.value === value));
-
-        setOptions([...selectedOptions.sort((a, b) => selectedOrder.indexOf(a.value) - selectedOrder.indexOf(b.value)), ...nonSelectedOptions]);
     };
 
 
@@ -60,9 +52,8 @@ const MyDropdown = ({ defaultValue, options, setOptions, originalOrder}) => {
             </div>
             {isDropdownOpen && (
                 <div className="dropdown-content" id="dropdown-content">
-                    {options.map((option, index) => (
+                    {options.map((option, _) => (
                         <React.Fragment key={option.label}>
-                            {index > 0 && options[index - 1].checked !== option.checked && <hr/>}
                             <label className="option" htmlFor={`checkbox-${option.value}`}>
                                 <input
                                     type="checkbox"
