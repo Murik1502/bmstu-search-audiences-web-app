@@ -29,6 +29,10 @@ const times = [
     { label: '19:10', value: '19:10', checked: false },
 ];
 
+// const week = [
+//     { label: 'numerator', value: 'numerator', checked: false },
+//     { label: 'denominator', value: 'denominator', checked: false },
+// ]
 
 function transformData(data) {
     const resultArray = [];
@@ -81,16 +85,22 @@ function List () {
     // }, []);
     //
     const [levelOptions, setLevelOptions] = useState(levels);
-    // const [timeOptions, setTimeOptions] = useState(times);
+    // const [weekOptions, setWeekOptions] = useState(week);
+    const [timeOptions, setTimeOptions] = useState(times);
     //
     //
+    useEffect(() => {
+        setLevelOptions(levelOptions);
+    }, [levelOptions]);
+
     // useEffect(() => {
-    //     setLevelOptions(levelOptions);
-    // }, [levelOptions]);
-    //
-    // useEffect(() => {
-    //     setTimeOptions(timeOptions);
-    // }, [timeOptions]);
+    //     setWeekOptions(weekOptions);
+    //     // fetch other week
+    // }, [weekOptions]);
+
+    useEffect(() => {
+        setTimeOptions(timeOptions);
+    }, [timeOptions]);
     //
     // useEffect(() => {
     //     setSortedAudiences(filterAudiences(audiences, levelOptions, timeOptions))
@@ -117,7 +127,7 @@ function List () {
                             hasImage={false}
                             buttonStyle={{padding: "11px", background: "#006cdc", width: "45px", height: "45px", borderRadius: "100px"}}
                             textWidth={"20px"}
-                            dropdownWidth={"45vw"}
+                            dropdownStyle={{width: "45vw"}}
                             content="settings"
                             options={levelOptions} setOptions={setLevelOptions}
                 />
@@ -125,35 +135,38 @@ function List () {
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
                             textWidth={"8vw"}
+                            dropdownStyle={{width: "45vw"}}
                             options={null} setOptions={null}
                 />
                 <Mydropdown defaultValue={"Вт, Ср, Чт, Пт"}
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
                             textWidth={"18vw"}
+                            dropdownStyle={{width: "45vw", right: 0}}
                             options={null} setOptions={null}
                 />
                 <Mydropdown defaultValue={"8:30, 12:00, 13:50"}
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
                             textWidth={"26vw"}
-                            options={null} setOptions={null}
+                            dropdownStyle={{width: "45vw", right: 0}}
+                            options={timeOptions} setOptions={setTimeOptions}
                 />
             </div>
-            <AudiencesList items={[
-                {floor: '6', number: "719л", time: "8:30 - 12:00"},
-                {floor: '6', number: "719л", time: "8:30 - 12:00"},
-                {floor: '6', number: "719л", time: "8:30 - 12:00"},
-                {floor: '7', number: "719л", time: "8:30 - 12:00"},
-                {floor: '7', number: "719л", time: "8:30 - 12:00"},
-                {floor: '7', number: "719л", time: "8:30 - 12:00"},
-                {floor: '7', number: "719л", time: "8:30 - 12:00"},
-                {floor: '7', number: "719л", time: "8:30 - 12:00"},
-                {floor: '8', number: "719л", time: "8:30 - 12:00"},
-                {floor: '8', number: "719л", time: "8:30 - 12:00"},
-                {floor: '8', number: "719л", time: "8:30 - 12:00"},
-                {floor: '9', number: "719л", time: "8:30 - 12:00"},
-            ]} floors={levelOptions}/>
+            {/*<AudiencesList items={[*/}
+            {/*    {floor: '6', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '6', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '6', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '7', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '7', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '7', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '7', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '7', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '8', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '8', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '8', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*    {floor: '9', number: "719л", time: "8:30 - 12:00"},*/}
+            {/*]} floors={levelOptions}/>*/}
             <Footer/>
         </div>
     );
