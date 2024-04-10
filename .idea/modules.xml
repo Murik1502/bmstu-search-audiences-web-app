@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/bmstu-search-audiences.iml" filepath="$PROJECT_DIR$/.idea/bmstu-search-audiences.iml" />
       <module fileurl="file://$PROJECT_DIR$/../bmstu-search-audiences-bot/.idea/bmstu-search-audiences-bot.iml" filepath="$PROJECT_DIR$/../bmstu-search-audiences-bot/.idea/bmstu-search-audiences-bot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../reactProjects/course/first/.idea/first.iml" filepath="$PROJECT_DIR$/../reactProjects/course/first/.idea/first.iml" />
     </modules>
   </component>
 </project>

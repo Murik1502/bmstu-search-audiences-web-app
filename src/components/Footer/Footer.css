@@ -3,21 +3,20 @@
 
 .footer {
     font-family: "ALS Sector Regular Regular";
-    font-size: 14px;
-    width: 100%;
-    height: 35px;
-    display: flex;
-    background: #303030;
-    color: #fff;
-    align-items: center;
-    justify-content: center;
+    font-size: 16px;
+    width: 92vw;
+    text-align: center;
+justify-content: center;
+    background: transparent;
+    color: #C7C7C9;
     position: fixed;
-    left: 0;
-    bottom: 0;
+    bottom: 2vh;
 }
 
 
 .footer__link {
     cursor: pointer;
+    text-align: center;
     text-decoration: none;
+    opacity: 0.5;
 }

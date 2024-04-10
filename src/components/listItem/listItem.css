@@ -1,17 +1,28 @@
-.item {
-    background: #333333;
+@import url(https://db.onlinewebfonts.com/c/55c75572ae1d9f96d61851294e1698ec?family=ALS+Sector+Bold+Bold);
+@import url(https://db.onlinewebfonts.com/c/595030bb520f1e2ab2fb4e8d7c5f30a5?family=ALS+Sector+Regular+Regular);
+
+.audience {
+    font-family: "Roboto", sans-serif;
+    background-color: var(--d-grey);
     display: flex;
-    border-radius: 10px;
-    padding: 2px;
-    border: 1px solid #ccc;
-    width: 130px;
-    height: 42px;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    width: fit-content;
+    padding: 13px 16px;
+    border-radius: 11px;
+
+    flex: 0 0 auto;
 }
 
-.item-label {
-    font-size: 20px;
+.audience-number {
+    font-size: 16px;
+
+}
+
+.floor {
     font-family: "ALS Sector Regular Regular";
-    line-height: 1.1;
+}
+
+.time {
+    font-size: 10px;
+    color: var(--l-grey);
 }

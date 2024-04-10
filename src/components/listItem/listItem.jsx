@@ -2,8 +2,9 @@ import React from 'react';
 import "./listItem.css"
 const ListItem = ({number, time}) => {
     return (
-        <div className="item">
-            <label className="item-label">{number+" | "+time}</label>
+        <div className="audience">
+            <div className="audience-number">{number}</div>
+            <div className="time">{time}</div>
         </div>
     );
 };

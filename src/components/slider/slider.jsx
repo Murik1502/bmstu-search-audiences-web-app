@@ -3,7 +3,6 @@ import "./slider.css";
 
 const Slider = ({weekDay, setWeekDay}) => {
     return (
-
             <div className="custom-checkbox">
                 <input id="status" type="checkbox" name="status"/>
                     <label htmlFor="status">

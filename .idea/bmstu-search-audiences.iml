@@ -11,5 +11,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="bmstu-search-audiences-bot" />
     <orderEntry type="library" name="telegram-web-app" level="application" />
+    <orderEntry type="module" module-name="first" />
   </component>
 </module>
