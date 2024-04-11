@@ -97,13 +97,16 @@ function List () {
     const {toggleBackButton, tg} = useTelegram();
 
     const onBackButtonClick = () => {
-        navigate('/');
         toggleBackButton();
-        tg.BackButton.offClick(() => onBackButtonClick());
+        return tg.BackButton.offClick();
     }
+
     if (!tg.BackButton.isVisible) {
         toggleBackButton();
-        tg.BackButton.onClick(() => onBackButtonClick());
+        tg.BackButton.onClick(() => {
+            navigate('/');
+            return onBackButtonClick();
+        });
     }
     //
     // //const weekDayData = location.state.data
