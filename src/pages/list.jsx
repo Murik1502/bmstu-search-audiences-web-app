@@ -50,7 +50,7 @@ function List () {
     const onBackButtonClick = () => {
         tg.BackButton.offClick(onBackButtonClick);
         toggleBackButton();
-        navigate('/');
+        navigate('');
     }
 
     if (!tg.BackButton.isVisible) {
