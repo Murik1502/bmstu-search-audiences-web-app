@@ -17,7 +17,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route index element={<Index/>}/>
+                <Route path={""} element={<Index/>}/>
                 <Route path={"list"} element={<List/>}/>
             </Routes>
         </BrowserRouter>
