@@ -211,7 +211,7 @@ function List () {
 
     return (
         <div className="mylist-wrap">
-            <h1 className="header-results">Результаты поиска</h1>
+            <h1 className="header-results">Результаты поиска:</h1>
             <div className="dropdown-wrapper-list">
                 <Mydropdown defaultValue={""}
                             multipleSelection={true}
