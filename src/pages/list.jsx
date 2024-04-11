@@ -48,14 +48,16 @@ function List () {
     const {toggleBackButton, tg} = useTelegram();
 
     const onBackButtonClick = () => {
-        tg.BackButton.offClick(onBackButtonClick);
         toggleBackButton();
-        navigate('');
+        return tg.BackButton.offClick();
     }
 
     if (!tg.BackButton.isVisible) {
         toggleBackButton();
-        tg.BackButton.onClick(onBackButtonClick);
+        tg.BackButton.onClick(() => {
+            navigate('/');
+            return onBackButtonClick();
+        });
     }
 
     useEffect(() => {
