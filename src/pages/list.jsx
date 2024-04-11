@@ -36,6 +36,16 @@ const days = [
 ];
 
 const audiencesArray = [
+    {floor: '1', number: "719л", time: "8:30 - 12:00"},
+    {floor: '1', number: "719л", time: "8:30 - 12:00"},
+    {floor: '2', number: "719л", time: "8:30 - 12:00"},
+    {floor: '2', number: "719л", time: "8:30 - 12:00"},
+    {floor: '4', number: "719л", time: "8:30 - 12:00"},
+    {floor: '4', number: "719л", time: "8:30 - 12:00"},
+    {floor: '4', number: "719л", time: "8:30 - 12:00"},
+    {floor: '5', number: "719л", time: "8:30 - 12:00"},
+    {floor: '5', number: "719л", time: "8:30 - 12:00"},
+    {floor: '5', number: "719л", time: "8:30 - 12:00"},
     {floor: '6', number: "719л", time: "8:30 - 12:00"},
     {floor: '6', number: "719л", time: "8:30 - 12:00"},
     {floor: '6', number: "719л", time: "8:30 - 12:00"},
@@ -48,6 +58,10 @@ const audiencesArray = [
     {floor: '8', number: "719л", time: "8:30 - 12:00"},
     {floor: '8', number: "719л", time: "8:30 - 12:00"},
     {floor: '9', number: "719л", time: "8:30 - 12:00"},
+    {floor: '9', number: "719л", time: "8:30 - 12:00"},
+    {floor: '9', number: "719л", time: "8:30 - 12:00"},
+    {floor: '11', number: "719л", time: "8:30 - 12:00"},
+    {floor: '11', number: "719л", time: "8:30 - 12:00"},
 ]
 
 const levels = [
