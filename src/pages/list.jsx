@@ -7,6 +7,7 @@ import {useFetching} from "../hooks/useFetching";
 import Footer from "../components/Footer/Footer";
 import AudiencesList from "../components/audiencesList/audiencesList";
 
+
 function mergeAdjacentCheckedTimes(times) {
     const selectedTimes = [];
 
@@ -98,11 +99,11 @@ function List () {
     const onBackButtonClick = () => {
         navigate('/');
         toggleBackButton();
-        tg.BackButton.offClick(onBackButtonClick);
+        tg.BackButton.offClick(() => onBackButtonClick());
     }
     if (!tg.BackButton.isVisible) {
         toggleBackButton();
-        tg.BackButton.onClick(onBackButtonClick);
+        tg.BackButton.onClick(() => onBackButtonClick());
     }
     //
     // //const weekDayData = location.state.data
