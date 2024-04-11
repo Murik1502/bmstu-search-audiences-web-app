@@ -16,32 +16,43 @@ const days = [
 ];
 
 const times = [
-    { label: '08:30', value: '08:30', checked: false },
-    { label: '10:15', value: '10:15', checked: false },
-    { label: '12:00', value: '12:00', checked: false },
-    { label: '13:50', value: '13:50', checked: false },
-    { label: '15:40', value: '15:40', checked: false },
-    { label: '17:25', value: '17:25', checked: false },
-    { label: '19:10', value: '19:10', checked: false },
+    { label: '08:30 - 10:05', value: '08:30', end: '10:05', checked: false },
+    { label: '10:15 - 11:50', value: '10:15', end: '11:50', checked: false },
+    { label: '12:00 - 13:35', value: '12:00', end: '13:35', checked: false },
+    { label: '13:50 - 15:25', value: '13:50', end: '15:25', checked: false },
+    { label: '15:40 - 17:15', value: '15:40', end: '17:15', checked: false },
+    { label: '17:25 - 19:00', value: '17:25', end: '19:00', checked: false },
+    { label: '19:10 - 20:45', value: '19:10', end: '20:45', checked: false },
 ];
+
+function mergeAdjacentCheckedTimes(times) {
+    const selectedTimes = [];
+
+    for (let i = 0; i < times.length; i++) {
+        if (times[i].checked) {
+            let start = times[i].value;
+            let end = times[i].end;
+            let j = i + 1;
+            while (j < times.length && times[j].checked) {
+                end = times[j].end;
+                j++;
+            }
+            selectedTimes.push(`${start} - ${end}`);
+            i = j - 1;
+        }
+    }
+    return selectedTimes;
+}
+
 
 function Index() {
     
     const navigate = useNavigate();
 
-    const [weekDayTime, setWeekDayTime] = useState({week: "numerator", day: [], time: []})
+    const [weekDayTime, setWeekDayTime] = useState({week: "numerator", day: "", times: []})
     const {tg} = useTelegram();
     tg.expand();
     tg.setHeaderColor("#000")
-
-    
-    useEffect(() => {
-        console.log(weekDayTime)
-        if (weekDayTime.day.length && weekDayTime.time.length) {
-
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [weekDayTime]);
 
     const location = useLocation();
 
@@ -52,7 +63,7 @@ function Index() {
         setDayOptions(dayOptions);
         setTimeOptions(timeOptions);
         const selectedDays = dayOptions.filter(option => option.checked).map(option =>  option.short);
-        const selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
+        const selectedTimes = mergeAdjacentCheckedTimes(timeOptions);
         const optionSvg = document.getElementById(`myBtn`);
         if (optionSvg) {
             optionSvg.style.background = selectedTimes.length && selectedDays.length ? '#006CDC' : 'transparent';
@@ -60,13 +71,13 @@ function Index() {
         }
     }, [dayOptions, timeOptions])
 
-    var selectedDays = dayOptions.filter(option => option.checked).map(option =>  option.short);
-    var selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
+    var selectedDays = dayOptions.filter(option => option.checked).map(option =>  option.label);
+    var selectedTimes = mergeAdjacentCheckedTimes(timeOptions);
 
     const onMainButtonClick = () => {
             weekDayTime.day = dayOptions.filter(option => option.checked).map(option =>  option.value);
-            weekDayTime.time = timeOptions.filter(option => option.checked).map(option => option.value);
-        if (weekDayTime.day.length && weekDayTime.time.length) {
+            weekDayTime.times = timeOptions.filter(option => option.checked).map(option => option.value);
+        if (weekDayTime.day.length && weekDayTime.times.length) {
             console.log(weekDayTime)
             navigate('/list', { state: { data: weekDayTime } });
 
@@ -82,11 +93,13 @@ function Index() {
                                 hasImage={true}
                                 textStyle={"28vw"}
                                 options={dayOptions} setOptions={setDayOptions}
+                                multipleSelection={false}
                     />
                     <Mydropdown defaultValue={selectedTimes.length ? selectedTimes.join(", ") : "Время"}
                                 hasImage={true}
                                 textWidth={"28vw"}
                                 options={timeOptions} setOptions={setTimeOptions}
+                                multipleSelection={true}
                     />
                 </div>
             <div className={"myBtn-wrap"}>

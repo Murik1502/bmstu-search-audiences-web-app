@@ -7,6 +7,33 @@ import {useFetching} from "../hooks/useFetching";
 import Footer from "../components/Footer/Footer";
 import AudiencesList from "../components/audiencesList/audiencesList";
 
+function mergeAdjacentCheckedTimes(times) {
+    const selectedTimes = [];
+
+    for (let i = 0; i < times.length; i++) {
+        if (times[i].checked) {
+            let start = times[i].value;
+            let end = times[i].end;
+            let j = i + 1;
+            while (j < times.length && times[j].checked) {
+                end = times[j].end;
+                j++;
+            }
+            selectedTimes.push(`${start} - ${end}`);
+            i = j - 1;
+        }
+    }
+    return selectedTimes;
+}
+const days = [
+    { label: 'Понедельник', short: 'Пн', value: 'monday', checked: false },
+    { label: 'Вторник', short: 'Вт', value: 'tuesday', checked: false },
+    { label: 'Среда', short: 'Ср', value: 'wednesday', checked: false },
+    { label: 'Четверг', short: 'Чт', value: 'thursday', checked: false },
+    { label: 'Пятница', short: 'Пт', value: 'friday', checked: false },
+    { label: 'Суббота', short: 'Сб', value: 'saturday', checked: false },
+];
+
 const audiencesArray = [
     {floor: '6', number: "719л", time: "8:30 - 12:00"},
     {floor: '6', number: "719л", time: "8:30 - 12:00"},
@@ -35,19 +62,19 @@ const levels = [
 ];
 
 const times = [
-    { label: '08:30', value: '08:30', checked: false },
-    { label: '10:15', value: '10:15', checked: false },
-    { label: '12:00', value: '12:00', checked: false },
-    { label: '13:50', value: '13:50', checked: false },
-    { label: '15:40', value: '15:40', checked: false },
-    { label: '17:25', value: '17:25', checked: false },
-    { label: '19:10', value: '19:10', checked: false },
+    { label: '08:30 - 10:05', value: '08:30', end: '10:05', checked: false },
+    { label: '10:15 - 11:50', value: '10:15', end: '11:50', checked: false },
+    { label: '12:00 - 13:35', value: '12:00', end: '13:35', checked: false },
+    { label: '13:50 - 15:25', value: '13:50', end: '15:25', checked: false },
+    { label: '15:40 - 17:15', value: '15:40', end: '17:15', checked: false },
+    { label: '17:25 - 19:00', value: '17:25', end: '19:00', checked: false },
+    { label: '19:10 - 20:45', value: '19:10', end: '20:45', checked: false },
 ];
 
-// const week = [
-//     { label: 'numerator', value: 'numerator', checked: false },
-//     { label: 'denominator', value: 'denominator', checked: false },
-// ]
+const weeks = [
+    { label: 'Числитель', short: "Чс", value: 'numerator', checked: false },
+    { label: 'Знаменатель', short: "Зн", value: 'denominator', checked: false },
+]
 
 function transformData(data) {
     const resultArray = [];
@@ -63,14 +90,15 @@ function transformData(data) {
 function List () {
 
     const location = useLocation();
+
     const navigate = useNavigate();
 
     const {toggleBackButton, tg} = useTelegram();
 
     const onBackButtonClick = () => {
-        tg.BackButton.offClick(onBackButtonClick);
-        toggleBackButton();
         navigate('/');
+        toggleBackButton();
+        tg.BackButton.offClick(onBackButtonClick);
     }
     if (!tg.BackButton.isVisible) {
         toggleBackButton();
@@ -99,24 +127,51 @@ function List () {
     // }, []);
     //
     const [levelOptions, setLevelOptions] = useState(levels);
-    // const [weekOptions, setWeekOptions] = useState(week);
-    const [timeOptions, setTimeOptions] = useState(times);
+    const [timeOptions, setTimeOptions] = useState(times.map(time => {
+        const checkedTime = location.state.data.times.find(selTime => selTime === time.value);
+        if (checkedTime) {
+            return { ...time, checked: true };
+        } else {
+            return time;
+        }
+    }));
+
+    const [weekOptions, setWeekOptions] = useState(weeks.map(week => {
+        if (week.value === location.state.data.week) {
+            week.checked = true;
+        }
+        return week;
+    }));
+
+    const [dayOptions, setDayOptions] = useState(days.map(day => {
+        if (day.value === location.state.data.day[0]) {
+            day.checked = true;
+        }
+        return day
+    }))
     //
     //
     useEffect(() => {
         setLevelOptions(levelOptions);
     }, [levelOptions]);
 
-    // useEffect(() => {
-    //     setWeekOptions(weekOptions);
-    //     // fetch other week
-    // }, [weekOptions]);
+    useEffect(() => {
+        setWeekOptions(weekOptions);
+        // fetch other week
+    }, [weekOptions]);
 
     useEffect(() => {
         setTimeOptions(timeOptions);
     }, [timeOptions])
 
-    var selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
+    useEffect(() => {
+        setDayOptions(dayOptions)
+        console.log(dayOptions)
+    }, [dayOptions]);
+
+    var selectedTimes = mergeAdjacentCheckedTimes(timeOptions);
+    var selectedWeek = weekOptions.filter(option => option.checked).map(option =>  option.short);
+    var selectedDays = dayOptions.filter(option => option.checked).map(option =>  option.short);
 
     //
     // useEffect(() => {
@@ -141,6 +196,7 @@ function List () {
             <h1 className="header-results">Результаты поиска</h1>
             <div className="dropdown-wrapper-list">
                 <Mydropdown defaultValue={""}
+                            multipleSelection={true}
                             hasImage={false}
                             buttonStyle={{padding: "11px", background: "#006cdc", width: "45px", height: "45px", borderRadius: "100px"}}
                             textWidth={"20px"}
@@ -148,24 +204,27 @@ function List () {
                             content="settings"
                             options={levelOptions} setOptions={setLevelOptions}
                 />
-                <Mydropdown defaultValue={"Чс"}
+                <Mydropdown defaultValue={selectedWeek.length ? selectedWeek : "День недели"}
+                            multipleSelection={false}
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
                             textWidth={"8vw"}
                             dropdownStyle={{width: "45vw"}}
-                            options={null} setOptions={null}
+                            options={weekOptions} setOptions={setWeekOptions}
                 />
-                <Mydropdown defaultValue={"Вт, Ср, Чт, Пт"}
+                <Mydropdown defaultValue={selectedDays.length ? selectedDays.join(", ") : "День недели"}
+                            multipleSelection={false}
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
                             textWidth={"18vw"}
-                            dropdownStyle={{width: "45vw", right: 0}}
-                            options={null} setOptions={null}
+                            dropdownStyle={{width: "45vw"}}
+                            options={dayOptions} setOptions={setDayOptions}
                 />
                 <Mydropdown
                             hasImage={false}
-                            buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
-                            textWidth={"26vw"}
+                            multipleSelection={true}
+                            buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px", width: "45vw"}}
+                            textWidth={"45vw"}
                             dropdownStyle={{width: "45vw", right: 0}}
                             defaultValue={selectedTimes.length ? selectedTimes.join(", ") : "Время"}
                             options={timeOptions} setOptions={setTimeOptions}

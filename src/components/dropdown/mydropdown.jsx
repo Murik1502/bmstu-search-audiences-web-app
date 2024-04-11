@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./mydropdown.css";
 
-const MyDropdown = ({ content, defaultValue, options, setOptions, buttonStyle, hasImage, textWidth, dropdownStyle }) => {
+const MyDropdown = ({ multipleSelection, content, defaultValue, options, setOptions, buttonStyle, hasImage, textWidth, dropdownStyle }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectAllChecked, setSelectAllChecked] = useState(false);
     const dropdownRef = useRef(null);
@@ -33,16 +33,24 @@ const MyDropdown = ({ content, defaultValue, options, setOptions, buttonStyle, h
     };
 
     const handleChange = (value) => {
-            setOptions(prevOptions =>  {
-                const updatedOptions = prevOptions.map(option => {
-                    if(option.value === value) {
-                        option.checked = !option.checked
+        if (multipleSelection === true) {
+            setOptions(prevOptions => {
+                return prevOptions.map(option => {
+                    if (option.value === value) {
+                        return { ...option, checked: !option.checked };
                     }
-                    return option
-                })
-                return updatedOptions
-            })
+                    return option;
+                });
+            });
+        } else {
+            setOptions(prevOptions => {
+                return prevOptions.map(option => {
+                    return { ...option, checked: option.value === value };
+                });
+            });
+        }
     };
+
 
     return (
         <div className="dropdown" id="dropdown" ref={dropdownRef}>
@@ -61,7 +69,7 @@ const MyDropdown = ({ content, defaultValue, options, setOptions, buttonStyle, h
             </div>
             {isDropdownOpen && (
                 <div className="dropdown-content" id={"dropdown-content" + defaultValue} style={dropdownStyle}>
-                    <label className="option">
+                    {multipleSelection && <label className="option">
                         <input
                             type="checkbox"
                             id={`select-all-${defaultValue}`}
@@ -69,7 +77,7 @@ const MyDropdown = ({ content, defaultValue, options, setOptions, buttonStyle, h
                             checked={selectAllChecked}
                         />
                         <label htmlFor={`select-all-${defaultValue}`}>Выбрать все</label>
-                    </label>
+                    </label>}
                     {options.map((option, index) => (
                         <label key={option.value} className={options.length - 1 === index? "option-last" : "option"}>
                             <input
