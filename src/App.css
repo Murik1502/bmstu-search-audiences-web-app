@@ -16,7 +16,7 @@ h1,h2,h3,h4 {
 
 body {
   width: 100vw;
-  height: 90%;
+  height: 100vh;
   display: flex;
   background: #000;
   color: #FFFFFF;
