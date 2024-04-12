@@ -99,5 +99,9 @@ body {
   justify-self: center;
 }
 
-
+.loader-wrap {
+  position: relative;
+  left: 50%;
+  margin-top: 50%;
+}
 
