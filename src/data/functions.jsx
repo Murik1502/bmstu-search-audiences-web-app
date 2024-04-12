@@ -30,10 +30,6 @@ function isAdjacent(time1, time2, times) {
     return false;
 }
 
-
-
-
-
 export function mergeAdjacentCheckedTimes(times) {
     const selectedTimes = [];
 
