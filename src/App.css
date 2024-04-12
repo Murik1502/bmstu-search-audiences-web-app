@@ -104,3 +104,18 @@ body {
   left: 50%;
   margin-top: 50%;
 }
+
+.footer-wrap {
+  width: fit-content;
+  margin-bottom: 2vh;
+  align-content: center;
+  position: relative;
+  left: 50%;
+}
+
+.footer__link {
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  opacity: 0.5;
+}

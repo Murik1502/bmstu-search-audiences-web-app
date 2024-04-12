@@ -3,11 +3,11 @@ import {useLocation} from "react-router-dom";
 import Mydropdown from "../components/dropdown/mydropdown";
 import PostService from "../API/PostService";
 import {useFetching} from "../hooks/useFetching";
-import Footer from "../components/Footer/Footer";
 import AudiencesList from "../components/audiencesList/audiencesList";
 import {days, weeks, times, levels} from "../data/data"
 import {mergeAdjacentCheckedTimes, mergeAudiencesTime} from "../data/functions";
 import Loader from "../components/loader/loader";
+import {useTelegram} from "../hooks/useTelegram";
 
 function transformData(data) {
     const resultArray = [];
@@ -20,6 +20,8 @@ function transformData(data) {
     });
     return resultArray;
 }
+
+const FSGNLink = 'https://t.me/bmstu_fsgn'
 
 function List () {
     const location = useLocation();
@@ -156,7 +158,9 @@ function List () {
                     <AudiencesList items={sortedAudiences} floors={levelOptions}/>
                 )
             }
-            <Footer/>
+            <div className={"footer-wrap"}>
+                <a className={"footer__link"} onClick={() => window.Telegram.WebApp.openTelegramLink(FSGNLink)}>Created by SGN</a>
+            </div>
         </div>
     );
 }
