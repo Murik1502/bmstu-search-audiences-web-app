@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {wait} from "@testing-library/user-event/dist/utils";
 
 export const useFetching = (callback) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -6,12 +7,14 @@ export const useFetching = (callback) => {
 
     const fetching = async () => {
         try {
-            setIsLoading(true)
+            setIsLoading(true);
             await callback()
         } catch (e) {
             setError(e.message);
         } finally {
-            setIsLoading(false)
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 500);
         }
     }
 

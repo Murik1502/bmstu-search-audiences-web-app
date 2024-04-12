@@ -121,7 +121,6 @@ function List () {
                             options={levelOptions} setOptions={setLevelOptions}
                 />
                 <Mydropdown defaultValue={selectedWeek.length ? selectedWeek : "День недели"}
-                            closeOnClick={true}
                             multipleSelection={false}
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
@@ -130,7 +129,6 @@ function List () {
                             options={weekOptions} setOptions={setWeekOptions}
                 />
                 <Mydropdown defaultValue={selectedDays.length ? selectedDays.join(", ") : "День недели"}
-                            closeOnClick={true}
                             multipleSelection={false}
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
