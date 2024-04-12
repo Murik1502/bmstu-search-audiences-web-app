@@ -7,6 +7,7 @@ import Footer from "../components/Footer/Footer";
 import AudiencesList from "../components/audiencesList/audiencesList";
 import {days, weeks, times, levels} from "../data/data"
 import {mergeAdjacentCheckedTimes, mergeAudiencesTime} from "../data/functions";
+import Loader from "../components/loader/loader";
 
 function transformData(data) {
     const resultArray = [];
@@ -120,6 +121,7 @@ function List () {
                             options={levelOptions} setOptions={setLevelOptions}
                 />
                 <Mydropdown defaultValue={selectedWeek.length ? selectedWeek : "День недели"}
+                            closeOnClick={true}
                             multipleSelection={false}
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
@@ -128,6 +130,7 @@ function List () {
                             options={weekOptions} setOptions={setWeekOptions}
                 />
                 <Mydropdown defaultValue={selectedDays.length ? selectedDays.join(", ") : "День недели"}
+                            closeOnClick={true}
                             multipleSelection={false}
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
@@ -145,7 +148,16 @@ function List () {
                             options={timeOptions} setOptions={setTimeOptions}
                 />
             </div>
-            <AudiencesList items={sortedAudiences} floors={levelOptions}/>
+            {
+                isPostLoading ? (
+                    <div className="loader-wrap">
+                        <Loader/>
+                    </div>
+                ) : (
+
+                    <AudiencesList items={sortedAudiences} floors={levelOptions}/>
+                )
+            }
             <Footer/>
         </div>
     );

@@ -48,6 +48,7 @@ const MyDropdown = ({ multipleSelection, content, defaultValue, options, setOpti
                     return { ...option, checked: option.value === value };
                 });
             });
+            setIsDropdownOpen(false);
         }
     };
 
