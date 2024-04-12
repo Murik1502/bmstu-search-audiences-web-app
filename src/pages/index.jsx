@@ -33,11 +33,6 @@ function Index() {
     const navigate = useNavigate();
 
     const [weekDayTime, setWeekDayTime] = useState({week: "numerator", day: "", times: []})
-    const {tg} = useTelegram();
-    tg.expand();
-    tg.setHeaderColor("#000")
-
-    const location = useLocation();
 
     const [dayOptions, setDayOptions] = useState(days);
     const [timeOptions, setTimeOptions] = useState(times);

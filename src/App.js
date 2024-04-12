@@ -11,6 +11,8 @@ export default function App() {
     const {tg} = useTelegram();
     const [loading, setLoading] = useState(true)
     useEffect(() => {
+        tg.expand();
+        tg.setHeaderColor("#000");
         tg.ready();
         setTimeout(() => setLoading(false), 1000)
     }, [tg]);
