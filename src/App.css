@@ -1,10 +1,21 @@
-@import url(https://db.onlinewebfonts.com/c/55c75572ae1d9f96d61851294e1698ec?family=ALS+Sector+Bold+Bold);
-@import url(https://db.onlinewebfonts.com/c/595030bb520f1e2ab2fb4e8d7c5f30a5?family=ALS+Sector+Regular+Regular);
+@font-face {
+  font-family: 'ALS Sector';
+  font-style: normal;
+  font-weight: normal;
+  src: local('ALS Sector Regular'), url('/src/fonts/ALS_Sector-Regular.otf') format("truetype");
+}
+
+@font-face {
+  font-family: 'ALS Sector';
+  font-style: normal;
+  font-weight: bold;
+  src: local('ALS Sector Bold'), url('/src/fonts/ALS_Sector-Bold.otf') format("truetype");
+}
 
 h1,h2,h3,h4 {
   display: flex;
   align-self: center;
-  font-family: "ALS Sector Regular Regular";
+  font-family: 'ALS Sector', sans-serif;
   font-size: 31px;
 }
 

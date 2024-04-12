@@ -1,7 +1,7 @@
 .mySelect {
     justify-content: center;
     margin-top: 5vh;
-    font-family: "ALS Sector Regular Regular";
+    font-family: 'ALS Sector', sans-serif;
     display: flex;
     width: 250px;
     align-items: center;

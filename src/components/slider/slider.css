@@ -1,9 +1,6 @@
-@import url(https://db.onlinewebfonts.com/c/595030bb520f1e2ab2fb4e8d7c5f30a5?family=ALS+Sector+Regular+Regular);
-
-
 .custom-checkbox {
     justify-content: center;
-    font-family: "ALS Sector Regular Regular";
+    font-family: 'ALS Sector', sans-serif;
     margin-top: 20px;
     display: flex;
     width: 257px;
