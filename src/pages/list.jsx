@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {useTelegram} from "../hooks/useTelegram";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import Mydropdown from "../components/dropdown/mydropdown";
 import PostService from "../API/PostService";
 import {useFetching} from "../hooks/useFetching";
 import Footer from "../components/Footer/Footer";
 import AudiencesList from "../components/audiencesList/audiencesList";
-
+import {days, weeks, times, levels} from "../data/data"
 
 function mergeAdjacentCheckedTimes(times) {
     const selectedTimes = [];
@@ -26,124 +25,24 @@ function mergeAdjacentCheckedTimes(times) {
     }
     return selectedTimes;
 }
-const days = [
-    { label: 'Понедельник', short: 'Пн', value: 'monday', checked: false },
-    { label: 'Вторник', short: 'Вт', value: 'tuesday', checked: false },
-    { label: 'Среда', short: 'Ср', value: 'wednesday', checked: false },
-    { label: 'Четверг', short: 'Чт', value: 'thursday', checked: false },
-    { label: 'Пятница', short: 'Пт', value: 'friday', checked: false },
-    { label: 'Суббота', short: 'Сб', value: 'saturday', checked: false },
-];
-
-const audiencesArray = [
-    {floor: '1', number: "719л", time: "8:30 - 12:00"},
-    {floor: '1', number: "719л", time: "8:30 - 12:00"},
-    {floor: '2', number: "719л", time: "8:30 - 12:00"},
-    {floor: '2', number: "719л", time: "8:30 - 12:00"},
-    {floor: '4', number: "719л", time: "8:30 - 12:00"},
-    {floor: '4', number: "719л", time: "8:30 - 12:00"},
-    {floor: '4', number: "719л", time: "8:30 - 12:00"},
-    {floor: '5', number: "719л", time: "8:30 - 12:00"},
-    {floor: '5', number: "719л", time: "8:30 - 12:00"},
-    {floor: '5', number: "719л", time: "8:30 - 12:00"},
-    {floor: '6', number: "719л", time: "8:30 - 12:00"},
-    {floor: '6', number: "719л", time: "8:30 - 12:00"},
-    {floor: '6', number: "719л", time: "8:30 - 12:00"},
-    {floor: '7', number: "719л", time: "8:30 - 12:00"},
-    {floor: '7', number: "719л", time: "8:30 - 12:00"},
-    {floor: '7', number: "719л", time: "8:30 - 12:00"},
-    {floor: '7', number: "719л", time: "8:30 - 12:00"},
-    {floor: '7', number: "719л", time: "8:30 - 12:00"},
-    {floor: '8', number: "719л", time: "8:30 - 12:00"},
-    {floor: '8', number: "719л", time: "8:30 - 12:00"},
-    {floor: '8', number: "719л", time: "8:30 - 12:00"},
-    {floor: '9', number: "719л", time: "8:30 - 12:00"},
-    {floor: '9', number: "719л", time: "8:30 - 12:00"},
-    {floor: '9', number: "719л", time: "8:30 - 12:00"},
-    {floor: '11', number: "719л", time: "8:30 - 12:00"},
-    {floor: '11', number: "719л", time: "8:30 - 12:00"},
-]
-
-const levels = [
-    { label: '1 этаж', value: '1', checked: true },
-    { label: '2 этаж', value: '2', checked: true },
-    { label: '4 этаж', value: '4', checked: true },
-    { label: '5 этаж', value: '5', checked: true },
-    { label: '6 этаж', value: '6', checked: true },
-    { label: '7 этаж', value: '7', checked: true },
-    { label: '8 этаж', value: '8', checked: true },
-    { label: '9 этаж', value: '9', checked: true },
-    { label: '11 этаж', value: '11', checked: true },
-];
-
-const times = [
-    { label: '08:30 - 10:05', value: '08:30', end: '10:05', checked: false },
-    { label: '10:15 - 11:50', value: '10:15', end: '11:50', checked: false },
-    { label: '12:00 - 13:35', value: '12:00', end: '13:35', checked: false },
-    { label: '13:50 - 15:25', value: '13:50', end: '15:25', checked: false },
-    { label: '15:40 - 17:15', value: '15:40', end: '17:15', checked: false },
-    { label: '17:25 - 19:00', value: '17:25', end: '19:00', checked: false },
-    { label: '19:10 - 20:45', value: '19:10', end: '20:45', checked: false },
-];
-
-const weeks = [
-    { label: 'Числитель', short: "Чс", value: 'numerator', checked: false },
-    { label: 'Знаменатель', short: "Зн", value: 'denominator', checked: false },
-]
 
 function transformData(data) {
     const resultArray = [];
     data.forEach(item => {
         item.time.forEach(time => {
-            resultArray.push([item.floor, item.name, time.substr(0, 5)]);
+            const start = time.substr(0, 5);
+            const timeArray = times.find(time => time.value === start);
+            resultArray.push({floor: item.floor.toString(), number: item.name,time: `${timeArray.value} - ${timeArray.end}`});
         });
     });
-
+    console.log("result", resultArray)
     return resultArray;
 }
 
 function List () {
-
     const location = useLocation();
-
-    const navigate = useNavigate();
-
-    const {toggleBackButton, tg} = useTelegram();
-
-    const onBackButtonClick = () => {
-        toggleBackButton();
-        return tg.BackButton.offClick();
-    }
-
-    if (!tg.BackButton.isVisible) {
-        toggleBackButton();
-        tg.BackButton.onClick(() => {
-            navigate('/');
-            return onBackButtonClick();
-        });
-    }
-    //
-    // //const weekDayData = location.state.data
-    // //console.log("week day", weekDayData);
-    //
-    const [audiences, setAudiences] = useState(audiencesArray)
-    const [sortedAudiences, setSortedAudiences] = useState(audiences)
-    //
-    // // eslint-disable-next-line no-unused-vars
-    // const [fetchAudiences, isPostLoading, postError] = useFetching(
-    //     async () => {
-    //         const response = await PostService.getAll("numerator", "monday");
-    //         //const response = await PostService.getAll(weekDayData.week, weekDayData.day);
-    //         setAudiences(transformData(response.data))
-    //         console.log(audiences)
-    //     }
-    // )
-    //
-    // useEffect(() => {
-    //     fetchAudiences()
-    //     console.log("FETCHING")
-    // }, []);
-    //
+    const [audiences, setAudiences] = useState([])
+    //const [sortedAudiences, setSortedAudiences] = useState(audiences)
     const [levelOptions, setLevelOptions] = useState(levels);
     const [timeOptions, setTimeOptions] = useState(times.map(time => {
         const checkedTime = location.state.data.times.find(selTime => selTime === time.value);
@@ -167,10 +66,25 @@ function List () {
         }
         return day
     }))
-    //
-    //
+
+
+    const [fetchAudiences, isPostLoading, postError] = useFetching(
+        async () => {
+            const response = await PostService.getAll(
+                weekOptions.find(week => week.checked === true).value,
+                dayOptions.find(day => day.checked === true).value);
+            setAudiences(transformData(response.data))
+        }
+    )
+
+    useEffect(() => {
+        fetchAudiences()
+        console.log("FETCHING")
+    }, [weekOptions, dayOptions]);
+
     useEffect(() => {
         setLevelOptions(levelOptions);
+        console.log(audiences);
     }, [levelOptions]);
 
     useEffect(() => {
@@ -184,12 +98,16 @@ function List () {
 
     useEffect(() => {
         setDayOptions(dayOptions)
-        console.log(dayOptions)
     }, [dayOptions]);
+
+    useEffect(() => {
+        setAudiences(audiences)
+    }, [audiences]);
 
     var selectedTimes = mergeAdjacentCheckedTimes(timeOptions);
     var selectedWeek = weekOptions.filter(option => option.checked).map(option =>  option.short);
     var selectedDays = dayOptions.filter(option => option.checked).map(option =>  option.short);
+
 
     //
     // useEffect(() => {

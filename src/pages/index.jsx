@@ -5,25 +5,8 @@ import Mydropdown from "../components/dropdown/mydropdown";
 import Slider from "../components/slider/slider";
 import Button from "../components/Button/Button";
 import Footer from "../components/Footer/Footer";
+import {days, times} from "../data/data"
 
-const days = [
-    { label: 'Понедельник', short: 'Пн', value: 'monday', checked: false },
-    { label: 'Вторник', short: 'Вт', value: 'tuesday', checked: false },
-    { label: 'Среда', short: 'Ср', value: 'wednesday', checked: false },
-    { label: 'Четверг', short: 'Чт', value: 'thursday', checked: false },
-    { label: 'Пятница', short: 'Пт', value: 'friday', checked: false },
-    { label: 'Суббота', short: 'Сб', value: 'saturday', checked: false }
-];
-
-const times = [
-    { label: '08:30 - 10:05', value: '08:30', end: '10:05', checked: false },
-    { label: '10:15 - 11:50', value: '10:15', end: '11:50', checked: false },
-    { label: '12:00 - 13:35', value: '12:00', end: '13:35', checked: false },
-    { label: '13:50 - 15:25', value: '13:50', end: '15:25', checked: false },
-    { label: '15:40 - 17:15', value: '15:40', end: '17:15', checked: false },
-    { label: '17:25 - 19:00', value: '17:25', end: '19:00', checked: false },
-    { label: '19:10 - 20:45', value: '19:10', end: '20:45', checked: false },
-];
 
 function mergeAdjacentCheckedTimes(times) {
     const selectedTimes = [];
