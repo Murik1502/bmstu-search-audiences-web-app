@@ -6,25 +6,7 @@ import {useFetching} from "../hooks/useFetching";
 import Footer from "../components/Footer/Footer";
 import AudiencesList from "../components/audiencesList/audiencesList";
 import {days, weeks, times, levels} from "../data/data"
-
-function mergeAdjacentCheckedTimes(times) {
-    const selectedTimes = [];
-
-    for (let i = 0; i < times.length; i++) {
-        if (times[i].checked) {
-            let start = times[i].value;
-            let end = times[i].end;
-            let j = i + 1;
-            while (j < times.length && times[j].checked) {
-                end = times[j].end;
-                j++;
-            }
-            selectedTimes.push(`${start} - ${end}`);
-            i = j - 1;
-        }
-    }
-    return selectedTimes;
-}
+import {mergeAdjacentCheckedTimes, mergeAudiencesTime} from "../data/functions";
 
 function transformData(data) {
     const resultArray = [];
@@ -35,14 +17,13 @@ function transformData(data) {
             resultArray.push({floor: item.floor.toString(), number: item.name,time: `${timeArray.value} - ${timeArray.end}`});
         });
     });
-    console.log("result", resultArray)
     return resultArray;
 }
 
 function List () {
     const location = useLocation();
     const [audiences, setAudiences] = useState([])
-    //const [sortedAudiences, setSortedAudiences] = useState(audiences)
+    const [sortedAudiences, setSortedAudiences] = useState(audiences)
     const [levelOptions, setLevelOptions] = useState(levels);
     const [timeOptions, setTimeOptions] = useState(times.map(time => {
         const checkedTime = location.state.data.times.find(selTime => selTime === time.value);
@@ -64,7 +45,7 @@ function List () {
         if (day.value === location.state.data.day[0]) {
             day.checked = true;
         }
-        return day
+        return day;
     }))
 
 
@@ -73,18 +54,17 @@ function List () {
             const response = await PostService.getAll(
                 weekOptions.find(week => week.checked === true).value,
                 dayOptions.find(day => day.checked === true).value);
-            setAudiences(transformData(response.data))
+            setAudiences(transformData(response.data));
         }
     )
 
     useEffect(() => {
         fetchAudiences()
-        console.log("FETCHING")
+        console.log("FETCHING DATA");
     }, [weekOptions, dayOptions]);
 
     useEffect(() => {
         setLevelOptions(levelOptions);
-        console.log(audiences);
     }, [levelOptions]);
 
     useEffect(() => {
@@ -108,23 +88,22 @@ function List () {
     var selectedWeek = weekOptions.filter(option => option.checked).map(option =>  option.short);
     var selectedDays = dayOptions.filter(option => option.checked).map(option =>  option.short);
 
+    useEffect(() => {
+        if (audiences.length !== 0) {
+            setSortedAudiences(filterAudiences(audiences, timeOptions));
+        } else {
+            setSortedAudiences([]);
+        }
+    }, [audiences, timeOptions])
 
-    //
-    // useEffect(() => {
-    //     setSortedAudiences(filterAudiences(audiences, levelOptions, timeOptions))
-    //     // eslint-disable-next-line
-    // }, [audiences, levelOptions, timeOptions])
-    //
-    // var selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
-    // var selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
-    //
-    // const filterAudiences = (audiences, levelOptions, timeOptions) => {
-    //     selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
-    //     selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
-    //     return audiences.filter(audience => {
-    //         return selectedLevels.includes(audience[0]) && selectedTimes.includes(audience[2]);
-    //     });
-    // };
+    const filterAudiences = (audiences, timeOptions) => {
+        const selectedTimes = timeOptions.filter(option => option.checked).map(option => option.label);
+        let filteredAudiences = audiences.filter(audience => {
+            return selectedTimes.includes(audience.time)
+        });
+        console.log(filteredAudiences);
+        return mergeAudiencesTime(filteredAudiences, times);
+    };
 
 
     return (
@@ -166,7 +145,7 @@ function List () {
                             options={timeOptions} setOptions={setTimeOptions}
                 />
             </div>
-            <AudiencesList items={audiences} floors={levelOptions}/>
+            <AudiencesList items={sortedAudiences} floors={levelOptions}/>
             <Footer/>
         </div>
     );

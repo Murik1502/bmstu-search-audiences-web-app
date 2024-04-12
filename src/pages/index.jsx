@@ -1,31 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {useTelegram} from "../hooks/useTelegram";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Mydropdown from "../components/dropdown/mydropdown";
 import Slider from "../components/slider/slider";
 import Button from "../components/Button/Button";
 import Footer from "../components/Footer/Footer";
 import {days, times} from "../data/data"
-
-
-function mergeAdjacentCheckedTimes(times) {
-    const selectedTimes = [];
-
-    for (let i = 0; i < times.length; i++) {
-        if (times[i].checked) {
-            let start = times[i].value;
-            let end = times[i].end;
-            let j = i + 1;
-            while (j < times.length && times[j].checked) {
-                end = times[j].end;
-                j++;
-            }
-            selectedTimes.push(`${start} - ${end}`);
-            i = j - 1;
-        }
-    }
-    return selectedTimes;
-}
+import {mergeAdjacentCheckedTimes} from "../data/functions";
 
 
 function Index() {
