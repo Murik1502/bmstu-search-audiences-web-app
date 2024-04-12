@@ -138,7 +138,7 @@ function List () {
                 <Mydropdown
                             hasImage={false}
                             multipleSelection={true}
-                            buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px", width: "45vw"}}
+                            buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px", maxWidth: "45vw"}}
                             textWidth={"45vw"}
                             dropdownStyle={{width: "45vw", right: 0}}
                             defaultValue={selectedTimes.length ? selectedTimes.join(", ") : "Время"}
