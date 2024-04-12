@@ -158,9 +158,6 @@ function List () {
                     <AudiencesList items={sortedAudiences} floors={levelOptions}/>
                 )
             }
-            <div className={"footer-wrap"}>
-                <a className={"footer__link"} onClick={() => window.Telegram.WebApp.openTelegramLink(FSGNLink)}>Created by SGN</a>
-            </div>
         </div>
     );
 }
