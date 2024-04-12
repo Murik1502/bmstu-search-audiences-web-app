@@ -10,15 +10,8 @@ import Loading from "./Loading";
 export default function App() {
     const {tg} = useTelegram();
 
-    function expandHandler(){
-        if (!this.isExpanded){
-            this.expand()
-        }
-    }
-
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        Telegram.WebApp.onEvent('viewportChanged', expandHandler);
         tg.expand();
         tg.setHeaderColor("#000");
         tg.ready();
