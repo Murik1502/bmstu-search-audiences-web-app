@@ -35,9 +35,12 @@
 }
 
 .audiences-line {
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.audiences-line::-webkit-scrollbar {
+    display: none;
 }
 
 .floor-audiences {

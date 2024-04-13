@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="theme-color" content="#000000"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
     <meta
-            name="BMSTU Audiences App"
-            content="Web site for finding free audiences in BMSTU"
+      name="BMSTU Audiences App"
+      content="Web site for finding free audiences in BMSTU"
     />
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <title>BMSTU Audiences App</title>
-</head>
-<body>
-<noscript>You need to enable JavaScript to run this app.</noscript>
-<div id="root"></div>
-</body>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>
+      const docHeight = document.documentElement.scrollHeight;
+      const winHeight = window.innerHeight;
+
+      // Обработчик события прокрутки
+      window.addEventListener('scroll', function() {
+        // Проверяем, достигли ли мы верха страницы
+        if (window.scrollY === 0) {
+          // Если достигли верха, добавляем временное свойство к body, чтобы предотвратить дергание
+          document.body.style.paddingTop = '1px';
+        }
+
+        // Проверяем, достигли ли мы низа страницы
+        if (window.scrollY + winHeight >= docHeight) {
+          // Если достигли низа, добавляем временное свойство к body, чтобы предотвратить дергание
+          document.body.style.paddingBottom = '1px';
+        }
+      });
+    </script>
+  </body>
 </html>

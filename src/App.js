@@ -18,6 +18,7 @@ export default function App() {
         setTimeout(() => setLoading(false), 1000)
     }, [tg]);
 
+
     if (loading) {
         return <Loading/>
     }

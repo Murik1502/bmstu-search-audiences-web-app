@@ -7,7 +7,6 @@ import AudiencesList from "../components/audiencesList/audiencesList";
 import {days, weeks, times, levels} from "../data/data"
 import {mergeAdjacentCheckedTimes, mergeAudiencesTime} from "../data/functions";
 import Loader from "../components/loader/loader";
-import {useTelegram} from "../hooks/useTelegram";
 
 function transformData(data) {
     const resultArray = [];
@@ -20,8 +19,6 @@ function transformData(data) {
     });
     return resultArray;
 }
-
-const FSGNLink = 'https://t.me/bmstu_fsgn'
 
 function List () {
     const location = useLocation();
@@ -92,19 +89,14 @@ function List () {
     var selectedDays = dayOptions.filter(option => option.checked).map(option =>  option.short);
 
     useEffect(() => {
-        if (audiences.length !== 0) {
-            setSortedAudiences(filterAudiences(audiences, timeOptions));
-        } else {
-            setSortedAudiences([]);
-        }
-    }, [audiences, timeOptions])
+        setSortedAudiences(filterAudiences(audiences, timeOptions));
+    }, [audiences, timeOptions]);
 
     const filterAudiences = (audiences, timeOptions) => {
         const selectedTimes = timeOptions.filter(option => option.checked).map(option => option.label);
         let filteredAudiences = audiences.filter(audience => {
             return selectedTimes.includes(audience.time)
         });
-        console.log(filteredAudiences);
         return mergeAudiencesTime(filteredAudiences, times);
     };
 
