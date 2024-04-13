@@ -17,50 +17,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
-      // Check if the current environment supports touch events
-      if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
-        var touchStartY; // Variable to store the initial touch position along Y-axis
-        var touchStartX; // Variable to store the initial touch position along X-axis
-        var isScrolling = false; // Flag to track whether scrolling is in progress
-
-        // Add touch start event listener with passive: false
-        document.addEventListener('touchstart', function(e) {
-          var touch = e.touches[0]; // Get the first touch
-          touchStartY = touch.clientY; // Store the initial touch position along Y-axis
-          touchStartX = touch.clientX; // Store the initial touch position along X-axis
-          isScrolling = false; // Reset scrolling flag
-        }, { passive: false });
-
-        // Add touch move event listener with passive: false
-        document.addEventListener('touchmove', function(e) {
-          if (touchStartY !== null && touchStartX !== null) {
-            var touch = e.touches[0]; // Get the first touch
-            var deltaY = touch.clientY - touchStartY; // Calculate the vertical distance moved
-            var deltaX = touch.clientX - touchStartX; // Calculate the horizontal distance moved
-
-            // Check if the movement is primarily vertical or horizontal
-            if (Math.abs(deltaY) > Math.abs(deltaX)) {
-              // If the vertical scroll distance is greater than horizontal, prevent default behavior
-              e.preventDefault();
-              isScrolling = true; // Set scrolling flag
-            } else {
-              // Allow horizontal swiping
-              // Implement your swipe handling logic here
-              // For example, you can trigger actions based on the deltaX value
-            }
-          }
-        }, { passive: false });
-
-        // Add touch end event listener
-        document.addEventListener('touchend', function() {
-          touchStartY = null; // Reset the initial touch position along Y-axis
-          touchStartX = null; // Reset the initial touch position along X-axis
-          if (!isScrolling) {
-            // Execute your logic for touch end event when scrolling is not in progress
-          }
-        }, false);
-      }
-
+      //scroll fix logic
     </script>
   </body>
 </html>
