@@ -17,32 +17,16 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
-      let isScrolling = false;
+      const mylistWrap = document.querySelector('.mylist-wrap');
 
-      window.addEventListener('scroll', function() {
-        if (isScrolling) return;
+      mylistWrap.addEventListener('scroll', function(event) {
+        event.stopPropagation();
+      });
 
-        isScrolling = true;
-
-        setTimeout(function() {
-          const mylistWrap = document.querySelector('.mylist-wrap');
-
-          if (mylistWrap.getBoundingClientRect().bottom <= window.innerHeight) {
-            window.scrollTo({
-              top: window.scrollY - 1,
-              behavior: 'smooth'
-            });
-          }
-
-          if (window.scrollY === 0) {
-            window.scrollTo({
-              top: window.scrollY + 1,
-              behavior: 'smooth'
-            });
-          }
-
-          isScrolling = false;
-        }, 100);
+      document.body.addEventListener('scroll', function(event) {
+        if (!event.target.closest('.mylist-wrap')) {
+          event.preventDefault();
+        }
       });
     </script>
   </body>
