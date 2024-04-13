@@ -28,34 +28,22 @@
           const mylistWrap = document.querySelector('.mylist-wrap');
 
           if (mylistWrap.getBoundingClientRect().bottom <= window.innerHeight) {
-            smoothScrollTo(0, window.scrollY - 2, 300);
+            window.scrollTo({
+              top: window.scrollY - 1,
+              behavior: 'smooth'
+            });
+          }
+
+          if (window.scrollY === 0) {
+            window.scrollTo({
+              top: window.scrollY + 1,
+              behavior: 'smooth'
+            });
           }
 
           isScrolling = false;
         }, 100);
       });
-
-      function smoothScrollTo(x, y, duration) {
-        const start = performance.now();
-        const startY = window.scrollY;
-        const distance = y - startY;
-
-        function step(timestamp) {
-          const elapsed = timestamp - start;
-          const progress = Math.min(elapsed / duration, 1);
-          window.scrollTo(0, startY + distance * progress);
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          }
-        }
-
-        window.requestAnimationFrame(step);
-      }
-
-
-
-
-
     </script>
   </body>
 </html>
