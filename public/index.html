@@ -17,34 +17,48 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
-      document.addEventListener('touchstart', handleTouchStart, false);
-      document.addEventListener('touchmove', handleTouchMove, false);
+      // Check if the current environment supports touch events
+      if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
+        var touchStartY; // Variable to store the initial touch position along Y-axis
+        var touchStartX; // Variable to store the initial touch position along X-axis
+        var isScrolling = false; // Flag to track whether scrolling is in progress
 
-      let xDown = null;
-      let yDown = null;
+        // Add touch start event listener with passive: false
+        document.addEventListener('touchstart', function(e) {
+          var touch = e.touches[0]; // Get the first touch
+          touchStartY = touch.clientY; // Store the initial touch position along Y-axis
+          touchStartX = touch.clientX; // Store the initial touch position along X-axis
+          isScrolling = false; // Reset scrolling flag
+        }, { passive: false });
 
-      function handleTouchStart(evt) {
-        xDown = evt.touches[0].clientX;
-        yDown = evt.touches[0].clientY;
-      }
+        // Add touch move event listener with passive: false
+        document.addEventListener('touchmove', function(e) {
+          if (touchStartY !== null && touchStartX !== null) {
+            var touch = e.touches[0]; // Get the first touch
+            var deltaY = touch.clientY - touchStartY; // Calculate the vertical distance moved
+            var deltaX = touch.clientX - touchStartX; // Calculate the horizontal distance moved
 
-      function handleTouchMove(evt) {
-        if (!xDown || !yDown) {
-          return;
-        }
+            // Check if the movement is primarily vertical or horizontal
+            if (Math.abs(deltaY) > Math.abs(deltaX)) {
+              // If the vertical scroll distance is greater than horizontal, prevent default behavior
+              e.preventDefault();
+              isScrolling = true; // Set scrolling flag
+            } else {
+              // Allow horizontal swiping
+              // Implement your swipe handling logic here
+              // For example, you can trigger actions based on the deltaX value
+            }
+          }
+        }, { passive: false });
 
-        let xUp = evt.touches[0].clientX;
-        let yUp = evt.touches[0].clientY;
-
-        let xDiff = Math.abs(xDown - xUp);
-        let yDiff = Math.abs(yDown - yUp);
-
-        if (yDiff > xDiff && yDiff > 10) {
-          evt.preventDefault();
-        }
-
-        xDown = null;
-        yDown = null;
+        // Add touch end event listener
+        document.addEventListener('touchend', function() {
+          touchStartY = null; // Reset the initial touch position along Y-axis
+          touchStartX = null; // Reset the initial touch position along X-axis
+          if (!isScrolling) {
+            // Execute your logic for touch end event when scrolling is not in progress
+          }
+        }, false);
       }
 
     </script>
