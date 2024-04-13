@@ -17,17 +17,21 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
+      let isScrollingInsideMylistWrap = false;
+
       const mylistWrap = document.querySelector('.mylist-wrap');
 
-      mylistWrap.addEventListener('scroll', function(event) {
-        event.stopPropagation();
+      mylistWrap.addEventListener('scroll', function() {
+        isScrollingInsideMylistWrap = true;
       });
 
       document.body.addEventListener('scroll', function(event) {
-        if (!event.target.closest('.mylist-wrap')) {
+        if (!isScrollingInsideMylistWrap) {
           event.preventDefault();
         }
+        isScrollingInsideMylistWrap = false;
       });
+
     </script>
   </body>
 </html>
