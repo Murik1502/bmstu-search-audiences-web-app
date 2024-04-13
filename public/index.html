@@ -17,21 +17,14 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
-      const docHeight = document.documentElement.scrollHeight;
-      const winHeight = window.innerHeight;
-
-      // Обработчик события прокрутки
       window.addEventListener('scroll', function() {
-        // Проверяем, достигли ли мы верха страницы
-        if (window.scrollY === 0) {
-          // Если достигли верха, добавляем временное свойство к body, чтобы предотвратить дергание
-          document.body.style.paddingTop = '1px';
+        const mylistWrap = document.querySelector('.mylist-wrap');
+        if (mylistWrap.getBoundingClientRect().bottom <= window.innerHeight) {
+          window.scrollBy(0, -1);
         }
 
-        // Проверяем, достигли ли мы низа страницы
-        if (window.scrollY + winHeight >= docHeight) {
-          // Если достигли низа, добавляем временное свойство к body, чтобы предотвратить дергание
-          document.body.style.paddingBottom = '1px';
+        if (window.scrollY === 0) {
+          window.scrollBy(0, 1);
         }
       });
     </script>
