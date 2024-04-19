@@ -156,7 +156,7 @@ function List () {
                             multipleSelection={true}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px", maxWidth: "45vw"}}
                             textWidth={"45vw"}
-                            dropdownStyle={{width: "45vw", maxWidth: "175px", right: 0}}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px"}}
                             defaultValue={selectedTimes.length ? selectedTimes.join(", ") : "Время"}
                             options={timeOptions} setOptions={setTimeOptions}
                 />
