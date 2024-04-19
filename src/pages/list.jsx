@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import Mydropdown from "../components/dropdown/mydropdown";
 import PostService from "../API/PostService";
 import {useFetching} from "../hooks/useFetching";
@@ -7,6 +7,7 @@ import AudiencesList from "../components/audiencesList/audiencesList";
 import {days, weeks, times, levels} from "../data/data"
 import {mergeAdjacentCheckedTimes, mergeAudiencesTime} from "../data/functions";
 import Loader from "../components/loader/loader";
+import {useTelegram} from "../hooks/useTelegram";
 
 function transformData(data) {
     const resultArray = [];
@@ -21,6 +22,22 @@ function transformData(data) {
 }
 
 function List () {
+
+    const navigate = useNavigate();
+
+    const {tg, toggleBackButton} = useTelegram();
+
+    tg.onEvent('backButtonClicked', function() {
+        navigate('/');
+    });
+
+    if (!tg.BackButton.isVisible) {
+        toggleBackButton();
+        tg.BackButton.onClick(function () {
+            toggleBackButton();
+        });
+    }
+
     const location = useLocation();
     const [audiences, setAudiences] = useState([])
     const [sortedAudiences, setSortedAudiences] = useState(audiences)
