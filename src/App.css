@@ -1,11 +1,22 @@
-@import url(https://db.onlinewebfonts.com/c/55c75572ae1d9f96d61851294e1698ec?family=ALS+Sector+Bold+Bold);
-@import url(https://db.onlinewebfonts.com/c/595030bb520f1e2ab2fb4e8d7c5f30a5?family=ALS+Sector+Regular+Regular);
+@font-face {
+  font-family: 'ALS Sector';
+  font-style: normal;
+  font-weight: normal;
+  src: local('ALS Sector Regular'), url('/src/fonts/ALS_Sector-Regular.otf') format("truetype");
+}
+
+@font-face {
+  font-family: 'ALS Sector';
+  font-style: normal;
+  font-weight: bold;
+  src: local('ALS Sector Bold'), url('/src/fonts/ALS_Sector-Bold.otf') format("truetype");
+}
 
 h1,h2,h3,h4 {
   display: flex;
   align-self: center;
-  font-family: "ALS Sector Bold Bold";
-  font-size: 20px;
+  font-family: 'ALS Sector', sans-serif;
+  font-size: 31px;
 }
 
 * {
@@ -15,21 +26,34 @@ h1,h2,h3,h4 {
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  background: #1D1D1D;
+  background: #000;
   color: #FFFFFF;
-  justify-content: center;
 }
 
 .header {
-  margin-top: 15vh;
+  margin-top: 10px;
 }
 
 .wrap {
-  display: flex;
-  justify-content: center;
+  margin: 0 16px;
+]  display: flex;
   flex-direction: column;
 }
+
+.myBtn-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 16px;
+}
+
 
 .weekDaySelector {
   display: flex;
@@ -38,10 +62,46 @@ body {
 }
 
 .dropdown-wrapper {
-  gap: 7vh;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  max-width: 93vw;
+  gap: 10px;
+  justify-content: space-around;
+}
 
+.dropdown-wrapper-list {
+  display: flex;
+  width: fit-content;
+  height: 45px;
+  margin-top: 14px;
+  gap: 5px;
+}
+
+
+.mylist-wrap {
+  margin: 0 16px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+
+.header-results {
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+.content-settings {
+  display: flex;
+  content: url("../public/settings.svg");
+  width: 23px;
+  height: 18px;
+  font-size: 100px;
+  align-self: center;
+  justify-self: center;
+}
+
+.loader-wrap {
+  position: relative;
+  left: 50%;
+  margin-top: 50%;
 }
 

@@ -1,18 +1,27 @@
 import './App.css';
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import {useTelegram} from "./hooks/useTelegram";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Index from "./pages";
 import List from "./pages/list";
+import Loading from "./Loading";
 
-
-
-function App() {
-   const {tg} = useTelegram();
-
+export default function App() {
+    const {tg} = useTelegram();
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
+        tg.expand();
+        tg.setHeaderColor("#000");
         tg.ready();
+        setTimeout(() => setLoading(false), 1000)
     }, [tg]);
+
+
+    if (loading) {
+        return (
+            <Loading/>
+        )
+    }
 
     return (
         <BrowserRouter>
@@ -23,5 +32,3 @@ function App() {
         </BrowserRouter>
     );
 }
-
-export default App;

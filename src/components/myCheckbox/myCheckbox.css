@@ -1,0 +1,61 @@
+
+input[type="radio"]{
+    display: none;
+    appearance: none;
+    outline: none;
+}
+
+input[type="radio"] + label {
+    appearance: none;
+    cursor: pointer;
+}
+
+input[type="radio"] + label::before {
+    background-color: #303030;
+    appearance: none;
+    justify-self: center;
+    align-self: center;
+    content: '';
+    display: none;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    border-radius: 54px;
+    transition: color 0.5s ease;
+
+}
+
+input[type="radio"]:checked + label {
+    appearance: none;
+    color: white;
+    background-color: #006CDC;
+    border-radius: 54px;
+    transition: color 0.5s ease;
+}
+
+.day_selector {
+    margin-top: 20px;
+    background-color: #1C1C1E;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    border: none;
+    width: fit-content;
+    border-radius: 54px;
+    transition: all 0.5s ease;
+    font-family: 'ALS Sector', sans-serif;
+    font-size: 16px;
+}
+
+.numerator {
+    padding: 14px 20px;
+
+}
+
+.denominator {
+    padding: 14px 20px;
+}

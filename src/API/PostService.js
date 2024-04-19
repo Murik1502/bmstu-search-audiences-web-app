@@ -8,7 +8,6 @@ export default class PostService {
                 day: day
             }
         })
-        console.log(response)
         return response
     }
 }

@@ -1,136 +1,179 @@
 import React, {useEffect, useState} from 'react';
-import {useTelegram} from "../hooks/useTelegram";
 import {useLocation, useNavigate} from "react-router-dom";
-import MyList from "../components/list/myList";
 import Mydropdown from "../components/dropdown/mydropdown";
 import PostService from "../API/PostService";
 import {useFetching} from "../hooks/useFetching";
-
-const levels = [
-    { label: '1', value: '1', checked: false },
-    { label: '2', value: '2', checked: false },
-    { label: '4', value: '4', checked: false },
-    { label: '5', value: '5', checked: false },
-    { label: '6', value: '6', checked: false },
-    { label: '7', value: '7', checked: false },
-    { label: '8', value: '8', checked: false },
-    { label: '9', value: '9', checked: false },
-    { label: '11', value: '11', checked: false },
-];
-
-const times = [
-    { label: '08:30', value: '08:30', checked: false },
-    { label: '10:15', value: '10:15', checked: false },
-    { label: '12:00', value: '12:00', checked: false },
-    { label: '13:50', value: '13:50', checked: false },
-    { label: '15:40', value: '15:40', checked: false },
-    { label: '17:25', value: '17:25', checked: false },
-    { label: '19:10', value: '19:10', checked: false },
-];
-
+import AudiencesList from "../components/audiencesList/audiencesList";
+import {days, weeks, times, levels} from "../data/data"
+import {mergeAdjacentCheckedTimes, mergeAudiencesTime} from "../data/functions";
+import Loader from "../components/loader/loader";
+import {useTelegram} from "../hooks/useTelegram";
 
 function transformData(data) {
     const resultArray = [];
     data.forEach(item => {
         item.time.forEach(time => {
-            resultArray.push([item.floor, item.name, time.substr(0, 5)]);
+            const start = time.substr(0, 5);
+            const timeArray = times.find(time => time.value === start);
+            resultArray.push({floor: item.floor.toString(), number: item.name,time: `${timeArray.value} - ${timeArray.end}`});
         });
     });
-
     return resultArray;
 }
 
 function List () {
 
-    const location = useLocation();
     const navigate = useNavigate();
 
-    const {toggleBackButton, tg} = useTelegram();
+    const {tg} = useTelegram();
 
-    const onBackButtonClick = () => {
-        toggleBackButton();
-        return tg.BackButton.offClick();
-    }
+
+    tg.onEvent('backButtonClicked', function() {
+        navigate('/');
+    });
 
     if (!tg.BackButton.isVisible) {
-        toggleBackButton();
-        tg.BackButton.onClick(() => {
-            navigate('/');
-            return onBackButtonClick();
+        tg.BackButton.show();
+        tg.BackButton.onClick(function () {
+            tg.BackButton.hide();
         });
     }
 
-    useEffect(() => {
-        fetchAudiences()
-        console.log("FETCHING")
-        // eslint-disable-next-line
-    }, []);
-
-    const weekDayData = location.state.data
-    console.log("week day", weekDayData);
-
+    const location = useLocation();
     const [audiences, setAudiences] = useState([])
     const [sortedAudiences, setSortedAudiences] = useState(audiences)
+    const [levelOptions, setLevelOptions] = useState(levels);
+    const [timeOptions, setTimeOptions] = useState(times.map(time => {
+        const checkedTime = location.state.data.times.find(selTime => selTime === time.value);
+        if (checkedTime) {
+            return { ...time, checked: true };
+        } else {
+            return time;
+        }
+    }));
 
-    // eslint-disable-next-line no-unused-vars
+    const [weekOptions, setWeekOptions] = useState(weeks.map(week => {
+        if (week.value === location.state.data.week) {
+            week.checked = true;
+        } else {
+            week.checked = false;
+        }
+        return week;
+    }));
+
+    const [dayOptions, setDayOptions] = useState(days.map(day => {
+        if (day.value === location.state.data.day[0]) {
+            day.checked = true;
+        } else {
+            day.checked = false;
+        }
+        return day;
+    }))
+
+
     const [fetchAudiences, isPostLoading, postError] = useFetching(
         async () => {
-            //const response = await PostService.getAll("numerator", "monday");
-            const response = await PostService.getAll(weekDayData.week, weekDayData.day);
-            setAudiences(prevAudiences => transformData(response.data));
-            console.log(audiences)
+            const response = await PostService.getAll(
+                weekOptions.find(week => week.checked === true).value,
+                dayOptions.find(day => day.checked === true).value);
+            setAudiences(transformData(response.data));
         }
     )
 
 
     useEffect(() => {
         fetchAudiences()
-        console.log("FETCHING")
-    }, []);
 
-    const [levelOptions, setLevelOptions] = useState(levels);
-    const [timeOptions, setTimeOptions] = useState(times);
-
+        console.log("FETCHING DATA");
+    }, [weekOptions, dayOptions]);
 
     useEffect(() => {
         setLevelOptions(levelOptions);
     }, [levelOptions]);
 
     useEffect(() => {
-        setTimeOptions(timeOptions);
-    }, [timeOptions]);
-    
+        setWeekOptions(weekOptions);
+        // fetch other week
+    }, [weekOptions]);
+
     useEffect(() => {
-        setSortedAudiences(filterAudiences(audiences, levelOptions, timeOptions))
-        // eslint-disable-next-line
-    }, [audiences, levelOptions, timeOptions])
+        setTimeOptions(timeOptions);
+    }, [timeOptions])
 
-    var selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
-    var selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
+    useEffect(() => {
+        setDayOptions(dayOptions)
+    }, [dayOptions]);
 
-    const filterAudiences = (audiences, levelOptions, timeOptions) => {
-        selectedLevels = levelOptions.filter(option => option.checked).map(option =>  parseInt(option.value));
-        selectedTimes = timeOptions.filter(option => option.checked).map(option => option.value);
-        return audiences.filter(audience => {
-            return selectedLevels.includes(audience[0]) && selectedTimes.includes(audience[2]);
+    useEffect(() => {
+        setAudiences(audiences)
+    }, [audiences]);
+
+    var selectedTimes = mergeAdjacentCheckedTimes(timeOptions);
+    var selectedWeek = weekOptions.filter(option => option.checked).map(option =>  option.short);
+    var selectedDays = dayOptions.filter(option => option.checked).map(option =>  option.short);
+
+    useEffect(() => {
+        setSortedAudiences(filterAudiences(audiences, timeOptions));
+    }, [audiences, timeOptions]);
+
+    const filterAudiences = (audiences, timeOptions) => {
+        const selectedTimes = timeOptions.filter(option => option.checked).map(option => option.label);
+        let filteredAudiences = audiences.filter(audience => {
+            return selectedTimes.includes(audience.time)
         });
+        return mergeAudiencesTime(filteredAudiences, times);
     };
 
-    return (
-        <div>
-            <div className="dropdown-wrapper">
-                <Mydropdown defaultValue="Этаж" options={levelOptions} setOptions={setLevelOptions}
-                            />
-                <Mydropdown defaultValue="Время" options={timeOptions} setOptions={setTimeOptions}
-                            />
-            </div>
-            {   sortedAudiences.length ?
-                <MyList items={sortedAudiences}/> :
-                (selectedLevels.length && selectedTimes.length ?
-                    <h1 className={"item-header"}>Нет Аудиторий!</h1> :
-                    <h1 className={"item-header"}>Выберите время и этаж!</h1>)
-            }
 
+    return (
+        <div className="mylist-wrap">
+            <h1 className="header-results">Результаты поиска</h1>
+            <div className="dropdown-wrapper-list">
+                <Mydropdown defaultValue={""}
+                            multipleSelection={true}
+                            hasImage={false}
+                            buttonStyle={{padding: "11px", background: "#006cdc", width: "45px", height: "45px", borderRadius: "100px"}}
+                            textWidth={"20px"}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px"}}
+                            content="settings"
+                            options={levelOptions} setOptions={setLevelOptions}
+                />
+                <Mydropdown defaultValue={selectedWeek.length ? selectedWeek : "День недели"}
+                            multipleSelection={false}
+                            hasImage={false}
+                            buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
+                            textWidth={"8vw"}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px"}}
+                            options={weekOptions} setOptions={setWeekOptions}
+                />
+                <Mydropdown defaultValue={selectedDays.length ? selectedDays.join(", ") : "День недели"}
+                            multipleSelection={false}
+                            hasImage={false}
+                            buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
+                            textWidth={"18vw"}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px"}}
+                            options={dayOptions} setOptions={setDayOptions}
+                />
+                <Mydropdown
+                            hasImage={false}
+                            multipleSelection={true}
+                            buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px", maxWidth: "45vw"}}
+                            textWidth={"45vw"}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px"}}
+                            defaultValue={selectedTimes.length ? selectedTimes.join(", ") : "Время"}
+                            options={timeOptions} setOptions={setTimeOptions}
+                />
+            </div>
+            {
+                isPostLoading ? (
+                    <div className="loader-wrap">
+                        <Loader/>
+                    </div>
+                ) : (
+
+                    <AudiencesList items={sortedAudiences} floors={levelOptions}/>
+                )
+            }
         </div>
     );
 }

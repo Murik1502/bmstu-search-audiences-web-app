@@ -1,0 +1,48 @@
+:root {
+    --black: #000000;
+    --blue: #006cdc;
+    --white: #ffffff;
+    --d-grey: #1C1C1E;
+    --l-grey: #C7C7C9;
+}
+
+.list-option {
+    font-family: "Roboto", sans-serif;
+    width: fit-content;
+    padding: 13px 18px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    background-color: var(--d-grey);
+}
+
+.audiences-list {
+    margin-top: 32px;
+}
+
+.audiences-line {
+    padding: 0 16px;
+    margin-top: 6px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    position: absolute;
+    left: 0;
+}
+
+.audiences-line {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.audiences-line::-webkit-scrollbar {
+    display: none;
+}
+
+.floor-audiences {
+    margin-bottom: 84px;
+}
