@@ -27,6 +27,7 @@ function List () {
 
     const {tg} = useTelegram();
 
+
     tg.onEvent('backButtonClicked', function() {
         navigate('/');
     });
@@ -79,8 +80,10 @@ function List () {
         }
     )
 
+
     useEffect(() => {
         fetchAudiences()
+
         console.log("FETCHING DATA");
     }, [weekOptions, dayOptions]);
 
