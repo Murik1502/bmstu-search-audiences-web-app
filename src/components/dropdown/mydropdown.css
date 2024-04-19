@@ -87,15 +87,12 @@
     justify-content: space-between;
 }
 
-
 .option-last {
     display: flex;
     padding: 12px 17px;
     cursor: pointer;
     justify-content: space-between;
-
 }
-
 
 .option-text {
     font-size: 18px;
