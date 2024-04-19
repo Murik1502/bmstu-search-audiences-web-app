@@ -34,7 +34,7 @@ input[type="radio"]:checked + label {
     transition: color 0.5s ease;
 }
 
-.role_selector {
+.day_selector {
     margin-top: 20px;
     background-color: #1C1C1E;
     display: flex;
@@ -51,11 +51,11 @@ input[type="radio"]:checked + label {
     font-size: 16px;
 }
 
-.student {
+.numerator {
     padding: 14px 20px;
 
 }
 
-.teacher {
+.denominator {
     padding: 14px 20px;
 }
