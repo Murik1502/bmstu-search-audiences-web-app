@@ -25,16 +25,16 @@ function List () {
 
     const navigate = useNavigate();
 
-    const {tg, toggleBackButton} = useTelegram();
+    const {tg} = useTelegram();
 
     tg.onEvent('backButtonClicked', function() {
         navigate('/');
     });
 
     if (!tg.BackButton.isVisible) {
-        toggleBackButton();
+        tg.BackButton.show();
         tg.BackButton.onClick(function () {
-            toggleBackButton();
+            tg.BackButton.hide();
         });
     }
 
