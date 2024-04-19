@@ -6,10 +6,10 @@ import Index from "./pages";
 import List from "./pages/list";
 
 import Loading from "./Loading";
+import {Awaiter} from "./Awaiter";
 
 export default function App() {
     const {tg} = useTelegram();
-
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         tg.expand();
@@ -20,7 +20,11 @@ export default function App() {
 
 
     if (loading) {
-        return <Loading/>
+        return (
+            <Loading>
+                <Awaiter/>
+            </Loading>
+        )
     }
 
     return (

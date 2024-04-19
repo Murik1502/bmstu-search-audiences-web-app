@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import Mydropdown from "../components/dropdown/mydropdown";
-import Slider from "../components/slider/slider";
 import Button from "../components/Button/Button";
 import Footer from "../components/Footer/Footer";
 import {days, times} from "../data/data"
 import {mergeAdjacentCheckedTimes} from "../data/functions";
+import MyCheckbox from "../components/myCheckbox/myCheckbox";
 
 
 function Index() {
@@ -45,7 +45,7 @@ function Index() {
     return (
         <div className={"wrap"}>
                 <h1 className={"header"}>Поиск свободных аудиторий</h1>
-                <Slider weekDay={weekDayTime} setWeekDay={setWeekDayTime}/>
+                <MyCheckbox weekDay={weekDayTime} setWeekDay={setWeekDayTime}/>
                 <div className="dropdown-wrapper">
                     <Mydropdown defaultValue={selectedDays.length ? selectedDays.join(", ") : "День недели"}
                                 hasImage={true}

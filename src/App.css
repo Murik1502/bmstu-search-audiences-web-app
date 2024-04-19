@@ -70,11 +70,10 @@ body {
 
 .dropdown-wrapper-list {
   display: flex;
-  max-width: 93vw;
+  width: fit-content;
   height: 45px;
   margin-top: 14px;
   gap: 5px;
-  justify-content: space-around;
 }
 
 

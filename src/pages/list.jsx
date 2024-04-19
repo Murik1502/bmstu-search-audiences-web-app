@@ -37,6 +37,8 @@ function List () {
     const [weekOptions, setWeekOptions] = useState(weeks.map(week => {
         if (week.value === location.state.data.week) {
             week.checked = true;
+        } else {
+            week.checked = false;
         }
         return week;
     }));
@@ -44,6 +46,8 @@ function List () {
     const [dayOptions, setDayOptions] = useState(days.map(day => {
         if (day.value === location.state.data.day[0]) {
             day.checked = true;
+        } else {
+            day.checked = false;
         }
         return day;
     }))
