@@ -4,9 +4,7 @@ import {useTelegram} from "./hooks/useTelegram";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Index from "./pages";
 import List from "./pages/list";
-
 import Loading from "./Loading";
-import {Awaiter} from "./Awaiter";
 
 export default function App() {
     const {tg} = useTelegram();
@@ -21,9 +19,7 @@ export default function App() {
 
     if (loading) {
         return (
-            <Loading>
-                <Awaiter/>
-            </Loading>
+            <Loading/>
         )
     }
 

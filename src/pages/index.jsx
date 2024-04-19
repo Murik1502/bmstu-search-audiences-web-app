@@ -36,7 +36,6 @@ function Index() {
             weekDayTime.day = dayOptions.filter(option => option.checked).map(option =>  option.value);
             weekDayTime.times = timeOptions.filter(option => option.checked).map(option => option.value);
         if (weekDayTime.day.length && weekDayTime.times.length) {
-            console.log(weekDayTime)
             navigate('/list', { state: { data: weekDayTime } });
 
         }

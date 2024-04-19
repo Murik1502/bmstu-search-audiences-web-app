@@ -2,9 +2,6 @@ import React, {useEffect} from 'react';
 import "./myCheckbox.css";
 
 const MyCheckbox = ({weekDay, setWeekDay}) => {
-    useEffect(() => {
-        console.log(weekDay)
-    }, [weekDay]);
     return (
             <div className="role_selector">
                 <input type="radio" name="role" id="student" value="numerator" defaultChecked={true} onInput={(e) => setWeekDay({
