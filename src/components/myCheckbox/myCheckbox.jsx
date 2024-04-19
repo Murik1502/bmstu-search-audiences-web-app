@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react';
 import "./myCheckbox.css";
 
 const MyCheckbox = ({weekDay, setWeekDay}) => {
