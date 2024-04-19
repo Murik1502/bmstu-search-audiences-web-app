@@ -131,7 +131,7 @@ function List () {
                             hasImage={false}
                             buttonStyle={{padding: "11px", background: "#006cdc", width: "45px", height: "45px", borderRadius: "100px"}}
                             textWidth={"20px"}
-                            dropdownStyle={{width: "45vw"}}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px"}}
                             content="settings"
                             options={levelOptions} setOptions={setLevelOptions}
                 />
@@ -140,7 +140,7 @@ function List () {
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
                             textWidth={"8vw"}
-                            dropdownStyle={{width: "45vw"}}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px"}}
                             options={weekOptions} setOptions={setWeekOptions}
                 />
                 <Mydropdown defaultValue={selectedDays.length ? selectedDays.join(", ") : "День недели"}
@@ -148,7 +148,7 @@ function List () {
                             hasImage={false}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px"}}
                             textWidth={"18vw"}
-                            dropdownStyle={{width: "45vw"}}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px"}}
                             options={dayOptions} setOptions={setDayOptions}
                 />
                 <Mydropdown
@@ -156,7 +156,7 @@ function List () {
                             multipleSelection={true}
                             buttonStyle={{padding: "13px 18px",  borderRadius: "100px", height: "45px", maxWidth: "45vw"}}
                             textWidth={"45vw"}
-                            dropdownStyle={{width: "45vw", right: 0}}
+                            dropdownStyle={{width: "45vw", maxWidth: "175px", right: 0}}
                             defaultValue={selectedTimes.length ? selectedTimes.join(", ") : "Время"}
                             options={timeOptions} setOptions={setTimeOptions}
                 />
