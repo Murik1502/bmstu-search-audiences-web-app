@@ -12,7 +12,6 @@ RUN npm install serve
 
 COPY . ./
 
-CMD ["react-scripts", "build"]
-
-CMD ["serve", "-s", "build"]
+RUN react-scripts build
+RUN serve -s build
 
