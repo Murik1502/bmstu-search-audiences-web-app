@@ -7,8 +7,12 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm install react-scripts@3.4.1 --silent
+RUN npm install serve
 
 COPY . ./
 
-CMD ["npm", "start"]
+RUN npm build
+
+CMD ["serve", "-s build -l 3000"]
+
