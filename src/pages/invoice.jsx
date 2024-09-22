@@ -14,6 +14,7 @@ export function Invoice() {
 				onClick={() => {
 					tg.openInvoice(value, callback => {
 						console.log(callback)
+						alert(callback)
 					})
 				}}
 			>
