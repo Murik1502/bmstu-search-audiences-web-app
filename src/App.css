@@ -31,7 +31,7 @@ h4 {
 }
 
 #root {
-	height: --tg-viewport-stable-height;
+	height: var(--tg-viewport-stable-height);
 	width: 100%;
 	display: flex;
 	justify-content: center;
