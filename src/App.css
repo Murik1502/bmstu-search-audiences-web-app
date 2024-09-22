@@ -34,6 +34,7 @@ body {
 	width: 100vw;
 	height: 100dvh;
 	display: flex;
+	overflow: hidden;
 	background: #000;
 	color: #ffffff;
 }
@@ -45,7 +46,6 @@ body {
 .wrap {
 	margin: 0 16px;
 	display: flex;
-	overflow: hidden;
 	flex-direction: column;
 }
 
