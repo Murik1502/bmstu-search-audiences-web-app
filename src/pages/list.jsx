@@ -93,8 +93,6 @@ function List() {
 
 	useEffect(() => {
 		fetchAudiences()
-
-		console.log('FETCHING DATA')
 	}, [weekOptions, dayOptions])
 
 	useEffect(() => {
@@ -103,7 +101,6 @@ function List() {
 
 	useEffect(() => {
 		setWeekOptions(weekOptions)
-		// fetch other week
 	}, [weekOptions])
 
 	useEffect(() => {
