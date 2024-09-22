@@ -45,6 +45,7 @@ body {
 .wrap {
 	margin: 0 16px;
 	display: flex;
+	overflow: hidden;
 	flex-direction: column;
 }
 
