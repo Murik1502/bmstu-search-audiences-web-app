@@ -1,19 +1,18 @@
 .footer {
-    font-family: 'ALS Sector', sans-serif;
-    font-size: 16px;
-    width: 100%;
-    text-align: center;
-    background: transparent;
-    color: #C7C7C9;
-    position: fixed;
-    left: 0;
-    bottom: 2vh;
+	font-family: 'ALS Sector', sans-serif;
+	font-size: 16px;
+	width: 100%;
+	text-align: center;
+	background: transparent;
+	color: #c7c7c9;
+	position: absolute;
+	left: 0;
+	bottom: 2vh;
 }
 
-
 .footer__link {
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    opacity: 0.5;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	opacity: 0.5;
 }

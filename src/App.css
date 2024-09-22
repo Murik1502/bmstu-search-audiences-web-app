@@ -30,6 +30,19 @@ h4 {
 	box-sizing: border-box;
 }
 
+#root {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.app {
+	position: relative;
+	max-width: 400px;
+	display: flex;
+	flex-direction: row;
+}
+
 body {
 	width: 100vw;
 	height: 100dvh;
@@ -53,7 +66,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
