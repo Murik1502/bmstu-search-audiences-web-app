@@ -40,7 +40,9 @@ h4 {
 	position: relative;
 	max-width: 400px;
 	display: flex;
+	height: 100%;
 	flex-direction: row;
+	overflow: hidden;
 }
 
 .app-list {
@@ -63,6 +65,7 @@ body {
 .wrap {
 	margin: 0 16px;
 	display: flex;
+	height: fit-content;
 	flex-direction: column;
 }
 
