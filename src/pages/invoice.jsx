@@ -12,10 +12,14 @@ export function Invoice() {
 			<input value={value} onChange={e => setValue(e.target.value)} />
 			<button
 				onClick={() => {
-					tg.openInvoice(value, callback => {
-						console.log(callback)
-						alert(callback)
-					})
+					try {
+						tg.openInvoice(value, callback => {
+							console.log(callback)
+							alert(callback)
+						})
+					} catch (e) {
+						alert(e)
+					}
 				}}
 			>
 				open Invoice
