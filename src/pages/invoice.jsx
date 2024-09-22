@@ -1,6 +1,19 @@
 import { useState } from 'react'
 import { useTelegram } from '../hooks/useTelegram'
 
+function handleInvoiceStatus(status) {
+	if (status === 'paid') {
+		alert('Invoice has been paid successfully!')
+		// Handle post-payment actions
+	} else if (status === 'cancelled') {
+		alert('Invoice was cancelled.')
+		// Handle cancellation actions
+	} else {
+		alert('Invoice status: ' + status)
+		// Handle other statuses if necessary
+	}
+}
+
 export function Invoice() {
 	const [value, setValue] = useState('')
 
@@ -13,10 +26,7 @@ export function Invoice() {
 			<button
 				onClick={() => {
 					try {
-						tg.openInvoice(value, callback => {
-							console.log(callback)
-							alert(callback)
-						})
+						tg.openInvoice(value, handleInvoiceStatus)
 					} catch (e) {
 						alert(e)
 					}
