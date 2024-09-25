@@ -28,7 +28,7 @@ export function Invoice() {
 
 	const handleButtonClick = () => {
 		navigator.clipboard
-			.writeText('initDataRaw')
+			.writeText(initDataRaw)
 			.then(() => alert('Raw Init Data copied to clipboard!'))
 			.catch(() => alert('Failed to copy Raw Init Data to clipboard!'))
 	}
