@@ -23,14 +23,18 @@ h1,h2,h3,h4 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* outline: 1px solid red; */
 }
 
 body {
+  background: #000;
+  color: #FFFFFF;
+}
+
+#root {
   width: 100vw;
   height: var(--tg-viewport-height);
   display: flex;
-  background: #000;
-  color: #FFFFFF;
 }
 
 .header {
@@ -73,20 +77,26 @@ body {
 .dropdown-wrapper-list {
   display: flex;
   width: fit-content;
-  height: 45px;
-  margin-top: 14px;
+  /* height: 45px; */
+  /* margin-top: 14px; */
   gap: 5px;
 }
 
 
 .mylist-wrap {
+  /* padding: 0 16px; */
+  display: flex;
+  flex-direction: column;
+  /* padding-bottom: 20px; */
+  /* overflow: hidden; */
+  width: 100%;
+  height: 100%;
+}
+
+.mylist-nav {
   padding: 0 16px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
-  overflow: hidden;
-    width: 100%;
-  height: 100%;
 }
 
 .header-results {
@@ -105,9 +115,9 @@ body {
 }
 
 .loader-wrap {
-  position: relative;
+  position: absolute;
   left: 50%;
-  margin-top: 50%;
+  top: 50%;
 }
 
 .flex-space {

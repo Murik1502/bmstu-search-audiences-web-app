@@ -10,6 +10,14 @@
     flex: 0 0 auto;
 }
 
+.audience:first-of-type {
+    margin-left: 16px;
+}
+
+.audience:last-of-type {
+    margin-right: 16px;
+}
+
 .audience-number {
     font-size: 16px;
 
@@ -17,6 +25,7 @@
 
 .floor {
     font-family: 'ALS Sector', sans-serif;
+    margin: 0 16px;
 }
 
 .time {
