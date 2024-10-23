@@ -27,7 +27,7 @@ h1,h2,h3,h4 {
 
 body {
   width: 100vw;
-  height: 100vh;
+  height: var(--tg-viewport-height);
   display: flex;
   background: #000;
   color: #FFFFFF;
@@ -38,11 +38,14 @@ body {
 }
 
 .wrap {
-  margin: 0 16px;
-]  display: flex;
+  padding: 0 16px;
+  display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
+/* 
 .myBtn-wrap {
   display: flex;
   align-items: center;
@@ -52,8 +55,7 @@ body {
   left: 0;
   right: 0;
   margin: 0 16px;
-}
-
+} */
 
 .weekDaySelector {
   display: flex;
@@ -78,10 +80,13 @@ body {
 
 
 .mylist-wrap {
-  margin: 0 16px;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
+  overflow: hidden;
+    width: 100%;
+  height: 100%;
 }
 
 .header-results {
@@ -105,3 +110,6 @@ body {
   margin-top: 50%;
 }
 
+.flex-space {
+  flex-grow: 1;
+}

@@ -13,6 +13,7 @@ export default function App() {
         tg.expand();
         tg.setHeaderColor("#000");
         tg.ready();
+        tg.disableVerticalSwipes();
         setTimeout(() => setLoading(false), 1000)
     }, [tg]);
 

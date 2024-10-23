@@ -43,25 +43,25 @@ function Index() {
 
     return (
         <div className={"wrap"}>
-                <h1 className={"header"}>Поиск свободных аудиторий</h1>
-                <MyCheckbox weekDay={weekDayTime} setWeekDay={setWeekDayTime}/>
-                <div className="dropdown-wrapper">
-                    <Mydropdown defaultValue={selectedDays.length ? selectedDays.join(", ") : "День недели"}
-                                hasImage={true}
-                                textStyle={"28vw"}
-                                options={dayOptions} setOptions={setDayOptions}
-                                multipleSelection={false}
-                    />
-                    <Mydropdown defaultValue={selectedTimes.length ? selectedTimes.join(", ") : "Время"}
-                                hasImage={true}
-                                textWidth={"28vw"}
-                                options={timeOptions} setOptions={setTimeOptions}
-                                multipleSelection={true}
-                    />
-                </div>
-            <div className={"myBtn-wrap"}>
-                <Button name={"Найти"} onClick={onMainButtonClick}/>
+            <h1 className={"header"}>Поиск свободных аудиторий</h1>
+            <MyCheckbox weekDay={weekDayTime} setWeekDay={setWeekDayTime}/>
+            <div className="dropdown-wrapper">
+                <Mydropdown defaultValue={selectedDays.length ? selectedDays.join(", ") : "День недели"}
+                            hasImage={true}
+                            textStyle={"28vw"}
+                            options={dayOptions} setOptions={setDayOptions}
+                            multipleSelection={false}
+                />
+                <Mydropdown defaultValue={selectedTimes.length ? selectedTimes.join(", ") : "Время"}
+                            hasImage={true}
+                            textWidth={"28vw"}
+                            options={timeOptions} setOptions={setTimeOptions}
+                            multipleSelection={true}
+                />
             </div>
+
+            <div className={"flex-space"}></div>
+            <Button name={"Найти"} onClick={onMainButtonClick}/>
             <Footer/>
         </div>
     );
