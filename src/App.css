@@ -32,9 +32,9 @@ body {
   overflow: hidden;
   width: 100vw;
   height: var(--tg-viewport-stable-height);
-  top: 0;
+  /* top: 0;
   left: 0;
-  position: fixed;
+  position: fixed; */
 }
 
 #root {
